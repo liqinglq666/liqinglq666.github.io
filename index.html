@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Li Qing - Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app" class="w-full h-screen overflow-hidden" style="background: #000000;">
+
+    <!-- Splash Screen -->
+    <div id="splash" class="fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-600" style="background: #000000;">
+      <video id="splash-video" autoplay muted class="w-full h-full object-cover absolute inset-0" style="display: none;">
+        <source src="./assets/splash-intro.mp4" type="video/mp4">
+      </video>
+      <div class="absolute inset-0" style="background: rgba(0, 0, 0, 0.3);"></div>
+
+      <div id="hero-text" style="
+        font-size: clamp(48px, 15vw, 96px);
+        font-family: 'Inter', sans-serif;
+        font-weight: 900;
+        text-align: center;
+        line-height: 1.0;
+        letter-spacing: -2px;
+        min-height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 20px;
+        position: relative;
+        z-index: 10;
+      "></div>
+
+      <!-- Splash Enter Button -->
+      <button id="splash-enter-btn" class="absolute bottom-12 left-1/2 -translate-x-1/2 px-8 py-3 font-bold text-sm rounded transition-all duration-200 hover:scale-110 active:scale-95" style="background: #faff69; color: #151515; border: 1px solid #faff69; cursor: pointer; z-index: 20; opacity: 0; pointer-events: none;">Enter Portfolio →</button>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content" class="fixed inset-0 z-40 transition-opacity duration-600" style="opacity: 0; pointer-events: none;">
+
+      <!-- Navigation -->
+      <nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 sm:px-8 lg:px-12 py-3 sm:py-6 border-b" style="
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        border-color: rgba(65, 65, 65, 0.8);
+      ">
+        <div class="text-lg sm:text-xl lg:text-2xl font-black tracking-wider" style="color: #faff69; font-weight: 900;">
+          LI QING
+        </div>
+        <ul class="flex gap-2 sm:gap-4 lg:gap-8 text-xs sm:text-xs lg:text-sm font-semibold" id="nav-menu">
+          <li><button class="nav-btn" data-page="0" style="color: #faff69;">HOME</button></li>
+          <li><button class="nav-btn" data-page="1" style="color: #a0a0a0;">PORTFOLIO</button></li>
+          <li><button class="nav-btn" data-page="2" style="color: #a0a0a0;">EXPERTISE</button></li>
+          <li><button class="nav-btn" data-page="3" style="color: #a0a0a0;">GROWTH</button></li>
+          <li><button class="nav-btn" data-page="4" style="color: #a0a0a0;">CONTACT</button></li>
+        </ul>
+      </nav>
+
+      <!-- Pages Container -->
+      <div class="relative w-full h-full pt-16 sm:pt-20 lg:pt-24 pb-6 sm:pb-8 lg:pb-12 overflow-hidden" style="perspective: 1200px;">
+
+        <!-- Page 0: Home -->
+        <section id="page-0" class="page absolute inset-0 pt-16 sm:pt-20 lg:pt-24 pb-6 sm:pb-8 lg:pb-12 px-4 sm:px-6 lg:px-12 overflow-y-auto transition-all duration-700" style="opacity: 1; transform: rotateY(0deg) scale(1); pointer-events: auto; z-index: 100; transform-style: preserve-3d;">
+          <div class="max-w-6xl mx-auto">
+
+            <div class="space-y-12 sm:space-y-20">
+              <div class="space-y-6 sm:space-y-12">
+                <div class="space-y-4 sm:space-y-8">
+                  <p class="text-xs sm:text-sm uppercase tracking-widest font-semibold" style="color: #a0a0a0; letter-spacing: 1.4px;">Welcome to my portfolio</p>
+                  <h1 class="leading-tight" style="font-size: clamp(48px, 12vw, 96px); color: #ffffff; font-family: 'Inter'; font-weight: 900; line-height: 1.0;">Li Qing</h1>
+                  <p class="text-base sm:text-xl leading-relaxed" style="color: #a0a0a0; max-width: 700px;">Graduate Student &amp; Researcher bridging Materials Science with AI, creating intelligent systems for discovery and optimization.</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                  <button class="goto-page-btn px-6 sm:px-8 py-2 sm:py-3 font-bold text-sm rounded transition-all duration-200 hover:scale-105 active:scale-95" data-page="2" style="background: #faff69; color: #151515; border: 1px solid #faff69; cursor: pointer;">VIEW PORTFOLIO</button>
+                  <button class="goto-page-btn px-6 sm:px-8 py-2 sm:py-3 font-bold text-sm rounded transition-all duration-200 hover:scale-105 active:scale-95" data-page="4" style="background: #166534; color: #ffffff; border: 1px solid #141414; cursor: pointer;">GET IN TOUCH</button>
+                </div>
+              </div>
+
+              <div class="space-y-6 sm:space-y-8">
+                <div class="border p-6 sm:p-8 rounded-lg" style="border-color: rgba(65, 65, 65, 0.8);">
+                  <h3 class="text-lg sm:text-xl font-bold mb-4" style="color: #ffffff; font-weight: 700;">Core Competencies</h3>
+                  <ul class="space-y-3 text-xs sm:text-sm" style="color: #a0a0a0; line-height: 1.6;">
+                    <li><span style="color: #faff69; font-weight: 600;">Materials Characterization:</span> TGA, DIC, Phase Analysis, Hydration Kinetics, Pore Structure Analysis, NMR Spectroscopy</li>
+                    <li><span style="color: #faff69; font-weight: 600;">AI &amp; Machine Learning:</span> Deep Learning, Physics-Informed Neural Networks (PINNs), Materials Property Prediction, Data-Driven Modeling</li>
+                    <li><span style="color: #faff69; font-weight: 600;">Programming:</span> Python, MATLAB, Data Processing, Scientific Computing, Visualization</li>
+                  </ul>
+                </div>
+
+                <div class="border p-6 sm:p-8 rounded-lg" style="border-color: rgba(65, 65, 65, 0.8);">
+                  <h3 class="text-lg sm:text-xl font-bold mb-4" style="color: #ffffff; font-weight: 700;">Research Focus</h3>
+                  <p class="leading-relaxed text-xs sm:text-sm" style="color: #a0a0a0;"><span style="color: #faff69; font-weight: 600;">Materials-AI Fusion:</span> Developing intelligent systems that combine traditional materials science with modern AI techniques. Automating materials analysis, predicting material properties from microstructure, accelerating discovery of novel material compositions.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Page 1: Portfolio -->
+        <section id="page-1" class="page absolute inset-0 pt-16 sm:pt-20 lg:pt-24 pb-6 sm:pb-8 lg:pb-12 px-4 sm:px-6 lg:px-12 overflow-y-auto transition-all duration-700" style="opacity: 0; transform: rotateY(-60deg) scale(0.8); pointer-events: none; z-index: 0; transform-style: preserve-3d;">
+          <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black mb-8 sm:mb-12" style="color: #ffffff; font-weight: 900;">Portfolio</h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8" id="projects-grid">
+              <!-- Projects will be inserted here by JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Page 2: Expertise -->
+        <section id="page-2" class="page absolute inset-0 pt-16 sm:pt-20 lg:pt-24 pb-6 sm:pb-8 lg:pb-12 px-4 sm:px-6 lg:px-12 overflow-y-auto transition-all duration-700" style="opacity: 0; transform: rotateY(-60deg) scale(0.8); pointer-events: none; z-index: 0; transform-style: preserve-3d;">
+          <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black mb-8 sm:mb-12" style="color: #ffffff; font-weight: 900;">Expertise</h2>
+
+            <div class="space-y-6 sm:space-y-8">
+              <div class="border p-6 sm:p-8 rounded-lg" style="border-color: rgba(65, 65, 65, 0.8);">
+                <h3 class="text-lg sm:text-xl font-bold mb-6" style="color: #ffffff; font-weight: 700;">Technical Skills</h3>
+                <ul class="space-y-3 text-xs sm:text-sm" style="color: #a0a0a0; line-height: 1.6;">
+                  <li><span style="color: #faff69; font-weight: 600;">Materials Characterization:</span> TGA, DIC, Phase Analysis, Hydration Kinetics, Pore Structure Analysis, NMR Spectroscopy</li>
+                  <li><span style="color: #faff69; font-weight: 600;">AI &amp; Machine Learning:</span> Deep Learning, Physics-Informed Neural Networks (PINNs), Materials Property Prediction, Data-Driven Modeling</li>
+                  <li><span style="color: #faff69; font-weight: 600;">Programming:</span> Python, MATLAB, Data Processing, Scientific Computing, Visualization</li>
+                </ul>
+              </div>
+
+              <div class="border p-6 sm:p-8 rounded-lg" style="border-color: rgba(65, 65, 65, 0.8);">
+                <h3 class="text-lg sm:text-xl font-bold mb-6" style="color: #ffffff; font-weight: 700;">Research Methodologies</h3>
+                <p class="leading-relaxed text-xs sm:text-sm" style="color: #a0a0a0;">Combining experimental materials characterization with advanced AI techniques to accelerate materials discovery and optimize processing parameters. Focus on developing physics-informed machine learning models that bridge theory and practice.</p>
+              </div>
+
+              <div class="border p-6 sm:p-8 rounded-lg" style="border-color: rgba(65, 65, 65, 0.8);">
+                <h3 class="text-lg sm:text-xl font-bold mb-6" style="color: #ffffff; font-weight: 700;">Key Achievements</h3>
+                <ul class="space-y-2 text-xs sm:text-sm" style="color: #a0a0a0;">
+                  <li>• Developed automated analysis tools for thermal gravimetric and microcracking data</li>
+                  <li>• Created physics-informed neural networks for materials property prediction</li>
+                  <li>• Published research on materials-AI fusion methodologies</li>
+                  <li>• Built comprehensive data processing pipelines for materials science workflows</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Page 3: Growth -->
+        <section id="page-3" class="page absolute inset-0 pt-16 sm:pt-20 lg:pt-24 pb-6 sm:pb-8 lg:pb-12 px-4 sm:px-6 lg:px-12 overflow-y-auto transition-all duration-700" style="opacity: 0; transform: rotateY(-60deg) scale(0.8); pointer-events: none; z-index: 0; transform-style: preserve-3d;">
+          <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black mb-8 sm:mb-12" style="color: #ffffff; font-weight: 900;">Growth</h2>
+
+            <div class="space-y-6 sm:space-y-8" id="growth-cards">
+              <!-- Growth cards will be inserted here by JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Page 4: Contact -->
+        <section id="page-4" class="page absolute inset-0 pt-16 sm:pt-20 lg:pt-24 pb-6 sm:pb-8 lg:pb-12 px-4 sm:px-6 lg:px-12 overflow-y-auto transition-all duration-700" style="opacity: 0; transform: rotateY(-60deg) scale(0.8); pointer-events: none; z-index: 0; transform-style: preserve-3d;">
+          <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black mb-8 sm:mb-12" style="color: #ffffff; font-weight: 900;">Contact</h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 max-w-3xl">
+              <div class="border p-6 sm:p-8 rounded-lg" style="border-color: rgba(65, 65, 65, 0.8);">
+                <h3 class="text-lg sm:text-xl font-bold mb-6" style="color: #ffffff; font-weight: 700;">Get In Touch</h3>
+                <div class="space-y-4">
+                  <p>
+                    <span style="color: #faff69; font-weight: 600; font-size: 12px; letter-spacing: 1.4px; text-transform: uppercase; display: block; margin-bottom: 8px;">Email</span>
+                    <a href="mailto:liqinglq666@gmail.com" style="color: #faff69; text-decoration: none; font-size: 14px;">liqinglq666@gmail.com</a>
+                  </p>
+                  <p>
+                    <span style="color: #faff69; font-weight: 600; font-size: 12px; letter-spacing: 1.4px; text-transform: uppercase; display: block; margin-bottom: 8px;">GitHub</span>
+                    <a href="https://github.com/liqinglq666" target="_blank" rel="noopener noreferrer" style="color: #faff69; text-decoration: none; font-size: 14px;">github.com/liqinglq666</a>
+                  </p>
+                </div>
+              </div>
+
+              <div class="border p-6 sm:p-8 rounded-lg" style="border-color: rgba(65, 65, 65, 0.8);">
+                <h3 class="text-lg sm:text-xl font-bold mb-6" style="color: #ffffff; font-weight: 700;">Resume</h3>
+                <p class="mb-4 leading-relaxed text-sm" style="color: #a0a0a0;">I'm currently refining my resume and will have it ready soon. Feel free to reach out via email!</p>
+                <button id="resume-btn" class="px-6 sm:px-8 py-2 sm:py-3 font-bold text-sm rounded transition-all duration-200 hover:scale-105 active:scale-95" style="background: #166534; color: #ffffff; border: 1px solid #141414; cursor: pointer;">📄 Download Resume</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Navigation Arrows (Removed) -->
+      </div>
+    </div>
+
+    <!-- Resume Modal -->
+    <div id="resume-modal" class="fixed inset-0 z-50 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center" style="display: none;">
+      <div class="bg-black border rounded-lg relative" style="border-color: rgba(65, 65, 65, 0.8); background: rgba(0, 0, 0, 0.95); width: 90%; max-width: 380px; padding: 24px 28px;">
+        <button class="absolute top-3 right-3 text-gray-400 hover:text-white text-2xl w-8 h-8 flex items-center justify-center rounded transition-colors" id="resume-modal-close">×</button>
+
+        <div class="text-center">
+          <div style="font-size: 40px; margin-bottom: 12px;">📄</div>
+          <h3 class="font-bold mb-3" style="color: #ffffff; font-size: 18px;">Resume Coming Soon</h3>
+          <p class="text-sm leading-relaxed mb-4" style="color: #a0a0a0; font-size: 13px;">I'm currently refining my resume to perfectly showcase my experience. It will be available very soon!</p>
+          <p style="color: #faff69; font-weight: 600; font-size: 12px; margin-bottom: 16px;">Feel free to reach out via email in the meantime 👋</p>
+
+          <div class="flex gap-2" style="display: flex; gap: 8px;">
+            <a href="mailto:liqinglq666@gmail.com" class="font-bold rounded transition-all duration-200 hover:scale-105 active:scale-95" style="background: #faff69; color: #151515; border: 1px solid #faff69; cursor: pointer; text-decoration: none; display: flex; align-items: center; justify-content: center; flex: 1; padding: 8px 12px; font-size: 12px;">Email Me</a>
+            <button id="resume-modal-close-btn" class="font-bold rounded transition-all duration-200 hover:scale-105 active:scale-95" style="background: transparent; color: #a0a0a0; border: 1px solid #a0a0a0; cursor: pointer; flex: 1; padding: 8px 12px; font-size: 12px;">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,752 @@
+/* ============================================================================
+   GLOBAL STYLES & DESIGN SYSTEM
+   ============================================================================ */
+
+:root {
+  /* Colors */
+  --color-primary: #faff69;
+  --color-primary-dark: #151515;
+  --color-bg: #000000;
+  --color-bg-overlay: rgba(0, 0, 0, 0.8);
+  --color-text: #ffffff;
+  --color-text-secondary: #a0a0a0;
+  --color-border: rgba(65, 65, 65, 0.8);
+  --color-accent-green: #166534;
+  --color-accent-dark: #141414;
+
+  /* Spacing */
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-20: 80px;
+
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+  --line-height-tight: 1.0;
+  --line-height-relaxed: 1.6;
+
+  /* Transitions */
+  --transition-fast: 200ms;
+  --transition-normal: 300ms;
+  --transition-slow: 600ms;
+  --transition-page: 700ms;
+  --easing-out: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Sizing */
+  --radius-lg: 8px;
+  --radius-full: 9999px;
+
+  /* Viewport */
+  --viewport-sm: 640px;
+  --viewport-lg: 1024px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: var(--font-family);
+  background: var(--color-bg);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+#app {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ============================================================================
+   TYPOGRAPHY
+   ============================================================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text);
+  font-weight: var(--font-weight-black);
+  margin: 0;
+}
+
+h1 {
+  line-height: var(--line-height-tight);
+}
+
+h2 {
+  font-weight: var(--font-weight-black);
+  margin-bottom: var(--space-12);
+}
+
+h3 {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+}
+
+p {
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity var(--transition-fast) ease;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+/* ============================================================================
+   BUTTONS & INTERACTIVE ELEMENTS
+   ============================================================================ */
+
+button {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-normal) ease;
+  cursor: pointer;
+}
+
+/* 移除 button:hover，改用 @media (hover) 来区分触屏/鼠标设备 */
+@media (hover: hover) {
+  button:hover {
+    transform: scale(1.05);
+  }
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: clamp(10px, 1.5vw, 12px);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  transition: color var(--transition-normal) ease;
+}
+
+.nav-btn[data-active="true"] {
+  color: var(--color-primary);
+}
+
+@media (hover: hover) {
+  .nav-btn:hover {
+    color: var(--color-primary);
+    transform: none;
+  }
+}
+
+.goto-page-btn {
+  padding: clamp(8px, 2vw, 12px) clamp(24px, 3vw, 32px);
+  font-size: 14px;
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-normal) ease;
+}
+
+/* ============================================================================
+   LAYOUT & CONTAINERS
+   ============================================================================ */
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: clamp(12px, 2vw, 24px) clamp(16px, 3vw, 48px);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg-overlay);
+  backdrop-filter: blur(10px);
+  gap: clamp(8px, 2vw, 32px);
+  flex-wrap: wrap;
+}
+
+nav > div:first-child {
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: var(--font-weight-black);
+  letter-spacing: 0.05em;
+  color: var(--color-primary);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: clamp(8px, 1.5vw, 24px);
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.max-w-6xl {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.max-w-3xl {
+  max-width: 768px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============================================================================
+   RESPONSIVE UTILITY CLASSES
+   ============================================================================ */
+
+/* Flexbox */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.items-start {
+  align-items: flex-start;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.gap-3 {
+  gap: var(--space-3);
+}
+
+.gap-4 {
+  gap: var(--space-4);
+}
+
+.gap-6 {
+  gap: var(--space-6);
+}
+
+.gap-8 {
+  gap: var(--space-8);
+}
+
+/* Grid */
+.grid {
+  display: grid;
+}
+
+.grid-cols-1 {
+  grid-template-columns: 1fr;
+}
+
+/* ============================================================================
+   MOBILE FIRST: 手机端 (< 640px)
+   ============================================================================ */
+
+/* Padding - 手机端缩小 */
+.p-6 {
+  padding: var(--space-4);
+}
+
+.p-8 {
+  padding: var(--space-6);
+}
+
+.px-4 {
+  padding-left: var(--space-3);
+  padding-right: var(--space-3);
+}
+
+.px-6 {
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+}
+
+.px-8 {
+  padding-left: var(--space-6);
+  padding-right: var(--space-6);
+}
+
+.py-2 {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.py-3 {
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-3);
+}
+
+.pt-16 {
+  padding-top: 32px;
+}
+
+.pb-6 {
+  padding-bottom: var(--space-4);
+}
+
+.pb-8 {
+  padding-bottom: var(--space-6);
+}
+
+/* Text sizing - 手机端缩小 */
+.text-xs {
+  font-size: 12px;
+}
+
+.text-sm {
+  font-size: 13px;
+}
+
+.text-base {
+  font-size: 14px;
+}
+
+.text-lg {
+  font-size: 15px;
+}
+
+.text-xl {
+  font-size: 16px;
+}
+
+.text-3xl {
+  font-size: 24px;
+}
+
+/* Spacing */
+.space-y-2 > * + * {
+  margin-top: 8px;
+}
+
+.space-y-3 > * + * {
+  margin-top: var(--space-3);
+}
+
+.space-y-4 > * + * {
+  margin-top: var(--space-4);
+}
+
+.space-y-6 > * + * {
+  margin-top: var(--space-6);
+}
+
+.space-y-8 > * + * {
+  margin-top: var(--space-6);
+}
+
+.space-y-12 > * + * {
+  margin-top: var(--space-8);
+}
+
+.space-y-20 > * + * {
+  margin-top: var(--space-12);
+}
+
+.mb-4 {
+  margin-bottom: var(--space-3);
+}
+
+.mb-6 {
+  margin-bottom: var(--space-4);
+}
+
+.mb-8 {
+  margin-bottom: var(--space-6);
+}
+
+.mb-12 {
+  margin-bottom: var(--space-8);
+}
+
+/* Display */
+.absolute {
+  position: absolute;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.relative {
+  position: relative;
+}
+
+.inset-0 {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
+}
+
+.z-40 {
+  z-index: 40;
+}
+
+.z-50 {
+  z-index: 50;
+}
+
+/* Width & Height */
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+.w-12 {
+  width: 44px;
+}
+
+.h-12 {
+  height: 44px;
+}
+
+/* Font weights */
+.font-semibold {
+  font-weight: var(--font-weight-semibold);
+}
+
+.font-bold {
+  font-weight: var(--font-weight-bold);
+}
+
+.font-black {
+  font-weight: var(--font-weight-black);
+}
+
+/* Text alignment */
+.text-center {
+  text-align: center;
+}
+
+/* Text properties */
+.uppercase {
+  text-transform: uppercase;
+}
+
+.leading-tight {
+  line-height: var(--line-height-tight);
+}
+
+.leading-relaxed {
+  line-height: var(--line-height-relaxed);
+}
+
+.tracking-widest {
+  letter-spacing: 1.4px;
+}
+
+.tracking-wider {
+  letter-spacing: 0.05em;
+}
+
+/* Border & Background */
+.border {
+  border: 1px solid var(--color-border);
+}
+
+.border-b {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.border-2 {
+  border: 2px solid var(--color-border);
+}
+
+.rounded {
+  border-radius: var(--radius-lg);
+}
+
+.rounded-lg {
+  border-radius: var(--radius-lg);
+}
+
+.rounded-full {
+  border-radius: var(--radius-full);
+}
+
+/* Transform */
+.transition-all {
+  transition: all var(--transition-normal) ease;
+}
+
+.transition-opacity {
+  transition: opacity var(--transition-slow) ease;
+}
+
+.transition-colors {
+  transition: color var(--transition-normal) ease;
+}
+
+.duration-200 {
+  transition-duration: var(--transition-fast);
+}
+
+.duration-600 {
+  transition-duration: var(--transition-slow);
+}
+
+.duration-700 {
+  transition-duration: var(--transition-page);
+}
+
+@media (hover: hover) {
+  .hover\:scale-105:hover {
+    transform: scale(1.05);
+  }
+
+  .hover\:scale-110:hover {
+    transform: scale(1.1);
+  }
+
+  .hover\:opacity-80:hover {
+    opacity: 0.8;
+  }
+}
+
+.active\:scale-95:active {
+  transform: scale(0.95);
+}
+
+/* ============================================================================
+   TABLET & DESKTOP: 640px 及以上
+   ============================================================================ */
+
+@media (min-width: 640px) {
+  /* Padding 恢复正常 */
+  .p-6 {
+    padding: var(--space-6);
+  }
+
+  .p-8 {
+    padding: var(--space-8);
+  }
+
+  .px-4 {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+
+  .px-6 {
+    padding-left: var(--space-6);
+    padding-right: var(--space-6);
+  }
+
+  .sm\:p-8 {
+    padding: var(--space-8);
+  }
+
+  .sm\:px-8 {
+    padding-left: var(--space-8);
+    padding-right: var(--space-8);
+  }
+
+  .sm\:py-3 {
+    padding-top: var(--space-3);
+    padding-bottom: var(--space-3);
+  }
+
+  .sm\:pt-20 {
+    padding-top: 80px;
+  }
+
+  .sm\:pb-8 {
+    padding-bottom: var(--space-8);
+  }
+
+  .pt-16 {
+    padding-top: 64px;
+  }
+
+  .pb-6 {
+    padding-bottom: var(--space-6);
+  }
+
+  /* Text sizing 恢复正常 */
+  .text-sm {
+    font-size: 14px;
+  }
+
+  .text-base {
+    font-size: 16px;
+  }
+
+  .text-lg {
+    font-size: 18px;
+  }
+
+  .text-xl {
+    font-size: 20px;
+  }
+
+  .text-3xl {
+    font-size: 30px;
+  }
+
+  .sm\:text-sm {
+    font-size: 14px;
+  }
+
+  .sm\:text-base {
+    font-size: 16px;
+  }
+
+  .sm\:text-lg {
+    font-size: 18px;
+  }
+
+  .sm\:text-xl {
+    font-size: 20px;
+  }
+
+  .sm\:text-4xl {
+    font-size: 36px;
+  }
+
+  /* Spacing 恢复正常 */
+  .space-y-8 > * + * {
+    margin-top: var(--space-8);
+  }
+
+  .space-y-12 > * + * {
+    margin-top: var(--space-12);
+  }
+
+  .space-y-20 > * + * {
+    margin-top: var(--space-20);
+  }
+
+  .mb-4 {
+    margin-bottom: var(--space-4);
+  }
+
+  .mb-6 {
+    margin-bottom: var(--space-6);
+  }
+
+  .mb-8 {
+    margin-bottom: var(--space-8);
+  }
+
+  .mb-12 {
+    margin-bottom: var(--space-12);
+  }
+
+  /* Grid */
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sm\:gap-8 {
+    gap: var(--space-8);
+  }
+
+  .sm\:flex-row {
+    flex-direction: row;
+  }
+
+  .sm\:space-y-8 > * + * {
+    margin-top: var(--space-8);
+  }
+
+  .sm\:space-y-12 > * + * {
+    margin-top: var(--space-12);
+  }
+
+  .sm\:space-y-20 > * + * {
+    margin-top: var(--space-20);
+  }
+
+  .sm\:w-14 {
+    width: 56px;
+  }
+
+  .sm\:h-14 {
+    height: 56px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:text-5xl {
+    font-size: 48px;
+  }
+
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lg\:gap-8 {
+    gap: var(--space-8);
+  }
+
+  .lg\:px-12 {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+
+  .lg\:pt-24 {
+    padding-top: 96px;
+  }
+
+  .lg\:pb-12 {
+    padding-bottom: 48px;
+  }
+}
+
+/* ============================================================================
+   触屏设备优化
+   ============================================================================ */
+
+@media (hover: none) and (pointer: coarse) {
+  /* 在触屏设备上增加按钮的点击目标大小 */
+  .nav-btn {
+    padding: 8px 12px;
+    border-radius: 4px;
+  }
+
+  .goto-page-btn {
+    padding: 12px 20px;
+    min-height: 48px;
+  }
+}
