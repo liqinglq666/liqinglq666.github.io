@@ -26,34 +26,68 @@ const app = (() => {
 
   const projects = [
     {
-      title: 'TGA_Analysis_Project',
-      url: 'https://github.com/liqinglq666/TGA_Analysis_Project',
-      desc: 'Python-based thermal gravimetric analysis (TGA) data automated processing tool.'
-    },
-    {
-      title: 'CrackVision-DIC',
-      url: 'https://github.com/liqinglq666/CrackVision-DIC',
-      desc: 'High-performance ECC/UHPC micro-cracking kinetics engine with DIC analysis.'
-    },
-    {
-      title: 'ECC_Analyzer_Pro',
-      url: 'https://github.com/liqinglq666/ECC_Analyzer_Pro',
-      desc: 'Automated physics-informed tool for characterizing material properties.'
-    },
-    {
-      title: 'Hydration-Kinetics-Pro',
-      url: 'https://github.com/liqinglq666/Hydration-Kinetics-Pro',
-      desc: 'Physics-informed framework for cementitious hydration kinetics.'
-    },
-    {
-      title: 'MatPropNet',
-      url: 'https://github.com/liqinglq666/MatPropNet',
-      desc: 'ML pipeline for materials science with Bayesian optimization.'
+      title: 'ECC-Micromechanics-Calculator',
+      url: 'https://github.com/liqinglq666/ECC-Micromechanics-Calculator',
+      desc: 'Desktop-level computational engine for fiber-reinforced cementitious composites micromechanics and pseudo-strain-hardening performance prediction.',
+      language: 'Python',
+      updated: 'Jun 2026',
+      tags: ['ECC', 'Micromechanics', 'Composite Design']
     },
     {
       title: 'NMR-Pore-Analyzer',
       url: 'https://github.com/liqinglq666/NMR-Pore-Analyzer',
-      desc: 'LF-NMR analysis for pore structure characterization.'
+      desc: 'Analyzes LF-NMR T2 spectra to extract pore size distributions, peak statistics, and classification metrics for cement-based materials research.',
+      language: 'Python',
+      updated: 'Jun 2026',
+      tags: ['LF-NMR', 'Pore Structure', 'Cement Materials']
+    },
+    {
+      title: 'GRA_micro_analyzer',
+      url: 'https://github.com/liqinglq666/GRA_micro_analyzer',
+      desc: 'Quantifies how microstructural factors such as porosity, hydration, and crystallinity influence macroscopic material performance.',
+      language: 'Python',
+      updated: 'May 2026',
+      tags: ['Grey Relational Analysis', 'Microstructure', 'Performance']
+    },
+    {
+      title: 'MatPropNet',
+      url: 'https://github.com/liqinglq666/MatPropNet',
+      desc: 'Automated, reproducible ML pipeline for materials science with nested cross-validation, Bayesian optimization, and SHAP-based physical attribution.',
+      language: 'Python',
+      updated: 'Apr 2026',
+      tags: ['Machine Learning', 'Bayesian Optimization', 'SHAP']
+    },
+    {
+      title: 'Hydration-Kinetics-Pro',
+      url: 'https://github.com/liqinglq666/Hydration-Kinetics-Pro',
+      desc: 'Physics-informed computational framework for complex cementitious hydration kinetics.',
+      language: 'Python',
+      updated: 'Apr 2026',
+      tags: ['Hydration Kinetics', 'Physics-Informed', 'Cement']
+    },
+    {
+      title: 'ECC_Analyzer_Pro',
+      url: 'https://github.com/liqinglq666/ECC_Analyzer_Pro',
+      desc: 'Automated, physics-informed tool for characterizing tensile and compressive properties of ECC/SHCC.',
+      language: 'Python',
+      updated: 'Apr 2026',
+      tags: ['Stress-Strain Analysis', 'ECC', 'Scientific Computing']
+    },
+    {
+      title: 'TGA_Analysis_Project',
+      url: 'https://github.com/liqinglq666/TGA_Analysis_Project',
+      desc: 'Python-based automated processing and visualization tool for thermogravimetric analysis data in materials science research.',
+      language: 'Python',
+      updated: 'Mar 2026',
+      tags: ['TGA', 'Automation', 'Data Analysis']
+    },
+    {
+      title: 'CrackVision-DIC',
+      url: 'https://github.com/liqinglq666/CrackVision-DIC',
+      desc: 'High-performance ECC/UHPC micro-cracking kinetics engine with an OriginLab-ready data pipeline.',
+      language: 'Python',
+      updated: 'Mar 2026',
+      tags: ['DIC', 'Microcracking', 'ECC/UHPC']
     }
   ];
 
@@ -175,14 +209,21 @@ const app = (() => {
     const grid = document.getElementById('projects-grid');
     if (!grid) return;
 
-    grid.innerHTML = projects.map((project, i) => `
-      <div class="border p-6 sm:p-8 rounded-lg transition-all hover:border-yellow-300" style="border-color: rgba(65, 65, 65, 0.8); cursor: pointer;">
-        <h3 class="text-base sm:text-lg font-bold mb-4" style="color: #ffffff; font-weight: 700;">
-          <a href="${project.url}" target="_blank" rel="noopener noreferrer" style="color: #faff69; text-decoration: none;" class="hover:opacity-80">
-            ${project.title}
-          </a>
-        </h3>
-        <p class="text-xs sm:text-sm leading-relaxed" style="color: #a0a0a0;">${project.desc}</p>
+    grid.innerHTML = projects.map((project) => `
+      <div class="project-card border p-6 sm:p-8 rounded-lg transition-all hover:border-yellow-300" style="border-color: rgba(65, 65, 65, 0.8);">
+        <div class="project-card-header">
+          <p class="project-meta">${project.language} · Updated ${project.updated}</p>
+          <h3 class="text-base sm:text-lg font-bold" style="color: #ffffff; font-weight: 700;">
+            <a href="${project.url}" target="_blank" rel="noopener noreferrer" style="color: #faff69; text-decoration: none;" class="hover:opacity-80">
+              ${project.title}
+            </a>
+          </h3>
+        </div>
+        <p class="project-desc text-xs sm:text-sm leading-relaxed" style="color: #a0a0a0;">${project.desc}</p>
+        <div class="project-tags">
+          ${project.tags.map(tag => `<span>${tag}</span>`).join('')}
+        </div>
+        <a class="project-link" href="${project.url}" target="_blank" rel="noopener noreferrer">View on GitHub</a>
       </div>
     `).join('');
   };
