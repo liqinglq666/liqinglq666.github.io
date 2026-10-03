@@ -134,7 +134,7 @@ const app = (() => {
   };
 
   let splashTimer = null;
-  const introSessionKey = 'liqing-original-cat-intro-v2';
+  const introSessionKey = 'liqing-fixed-LQ-intro-v3';
   const hideSplash = () => {
     clearTimeout(splashTimer);
     const video = document.getElementById('splash-video');
