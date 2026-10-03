@@ -45,6 +45,33 @@
 @keyframes lq-bubble-pop{0%{transform:translate(-50%,-50%) scale(.5);opacity:.75}100%{transform:translate(calc(-50% + var(--dx)),calc(-50% - var(--rise))) scale(1.25);opacity:0}}
 @media(prefers-reduced-motion:reduce){.lq-fish-bubble{display:none}}
 </style>
+
+<style id="liqing-mobile-layout">
+#app{height:100vh;height:100dvh}
+.page{padding-top:calc(var(--site-nav-height,100px) + 28px) !important;padding-bottom:calc(24px + env(safe-area-inset-bottom));overflow-x:hidden;overscroll-behavior-y:contain;touch-action:pan-y}
+.hero-layout>*{min-width:0}
+#main-content>nav{padding-top:calc(8px + env(safe-area-inset-top))}
+#page-4 a{overflow-wrap:anywhere}
+@media(max-width:639px){
+  #main-content>nav{display:grid;grid-template-columns:minmax(0,1fr);gap:2px;padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right));padding-top:calc(7px + env(safe-area-inset-top));padding-bottom:7px}
+  #main-content>nav .lq-logo-wrap{width:auto;min-height:48px}
+  #main-content>nav .lq-cat{width:75px;height:50px}
+  #main-content #nav-menu{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));width:100%;gap:0;overflow:visible;padding:0}
+  #nav-menu li{min-width:0}
+  #nav-menu .nav-btn{display:block;width:100%;min-height:44px;padding:8px 2px;font-size:9px;letter-spacing:.35px;border-radius:0}
+  .page{padding-left:max(18px,env(safe-area-inset-left));padding-right:max(18px,env(safe-area-inset-right))}
+  .hero-name{font-size:clamp(72px,22vw,100px);letter-spacing:-5px}
+  .hero-actions{gap:10px}
+  .hero-actions button,.filter-btn,.project-link{min-height:44px}
+  .practice-strip{grid-template-columns:1fr;margin-top:40px}
+  .practice-item{border-right:0;border-bottom:1px solid #41483a;padding:22px 0}
+  .practice-item:last-child{border-bottom:0}
+  #page-2 .space-y-6{grid-template-columns:1fr}
+  .project-card{min-width:0;padding:22px !important}
+  .project-card h3{font-size:20px;overflow-wrap:anywhere}
+  .lq-cat-note{top:calc(100% + 48px);max-width:calc(100vw - 32px)}
+}
+</style>
 </head>
 <body>
   <div id="app" class="w-full h-screen overflow-hidden" style="background: #000000;">
@@ -221,7 +248,7 @@
     };
     const sync = () => {
       const state = app.getState();
-      companion.hidden = state.showSplash || state.currentPage !== 0;
+      companion.hidden = state.showSplash;
       fallback.hidden = !companion.hidden;
       if (!visible()) {
         clearTimeout(blinkTimer); clearTimeout(reopenTimer); clearTimeout(noteTimer); clearTimeout(petTimer);
@@ -286,6 +313,17 @@
       setTimeout(() => bubble.remove(), 650);
     });
   }, {passive:true});
+})();
+</script>
+
+<script>
+(() => {
+  const nav = document.querySelector('#main-content > nav');
+  const root = document.getElementById('app');
+  const measure = () => root.style.setProperty('--site-nav-height', nav.getBoundingClientRect().height + 'px');
+  measure();
+  if ('ResizeObserver' in window) new ResizeObserver(measure).observe(nav);
+  else window.addEventListener('resize', measure, {passive:true});
 })();
 </script>
 </body>
