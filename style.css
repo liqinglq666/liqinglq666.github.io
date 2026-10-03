@@ -879,3 +879,96 @@ nav ul {
     min-height: 48px;
   }
 }
+
+/* Liqing / personal visual identity */
+:root { --color-text-secondary:#b4b4aa; }
+body {font-family:Arial,Helvetica,sans-serif;}
+::selection {background:#faff69;color:#161812;}
+#app {background:#10120f !important;}
+.page {background:radial-gradient(ellipse at 95% 0%,rgba(109,139,103,.09),transparent 45%),#10120f;}
+#main-content nav {background:rgba(16,18,15,.95)!important;padding:20px 48px;gap:24px;}
+.brand-mark {font-size:34px;letter-spacing:-3px;font-weight:800;}
+.brand-mark span {font-size:20px;margin-left:8px;vertical-align:top;}
+.nav-btn {font-size:11px;letter-spacing:1.2px;padding:10px 0;}
+.nav-btn[data-active="true"] {border-bottom:1px solid #faff69;}
+.hero-layout {display:grid;grid-template-columns:1.25fr 1fr;gap:60px;align-items:center;}
+.eyebrow {font:10px/1.6 monospace;letter-spacing:2px;color:#b6b9aa;margin-bottom:22px;}
+.status-dot {display:inline-block;width:7px;height:7px;border-radius:50%;background:#faff69;margin-right:10px;}
+.hero-name {font-size:clamp(88px,11vw,156px);line-height:.95;letter-spacing:-8px;font-weight:700;margin:0 0 30px;color:#f6f5e9;}
+.name-serif {font-family:Georgia,serif;font-style:italic;font-weight:400;}
+.name-dot {color:#faff69;}
+.hero-statement {font-size:clamp(32px,4vw,51px);line-height:1.12;letter-spacing:-1.8px;color:#f6f5e9;margin:0 0 24px;}
+.hero-statement span {color:#faff69;}
+.hero-description {color:#b3b6a9;line-height:1.8;font-size:14px;max-width:490px;}
+.hero-actions {display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;}
+.hero-actions button {font-size:12px;padding:15px 20px;border-radius:2px;cursor:pointer;}
+.action-primary {background:#faff69;color:#171911;border:1px solid #faff69;}
+.action-secondary {background:transparent;color:#f6f5e9;border:1px solid #5b6152;}
+.specimen-card {border:1px solid #4a5343;background:#172019;transform:rotate(2deg);padding:22px;position:relative;}
+.specimen-card:before {content:"";position:absolute;width:84px;height:24px;background:#b5bb9b88;top:-12px;left:calc(50% - 42px);transform:rotate(-6deg);}
+.specimen-label {display:flex;justify-content:space-between;font:9px monospace;letter-spacing:1px;color:#c4ceb9;}
+.fiber-art {display:block;width:100%;margin:22px 0;}
+.specimen-caption {border-top:1px solid #4a5343;padding-top:18px;}
+.specimen-caption p {font:italic 24px Georgia,serif;color:#ecf1dc;}
+.specimen-caption span {font:8px monospace;letter-spacing:1px;color:#a6b7a6;display:block;margin-top:8px;}
+.practice-strip {display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #41483a;border-bottom:1px solid #41483a;margin-top:64px;}
+.practice-item {display:flex;flex-direction:column;text-align:left;gap:12px;padding:26px 20px;background:none;border:0;color:#edeede;cursor:pointer;border-right:1px solid #41483a;}
+.practice-item:last-child {border-right:0;}
+.practice-item span {font:10px monospace;color:#faff69;letter-spacing:1px;}
+.practice-item strong {font-size:18px;font-weight:400;}
+.practice-item small {font-size:11px;color:#a7ad9d;}
+.practice-item:hover {background:#202619;}
+.personal-note {display:flex;align-items:center;gap:16px;padding:32px 0;}
+.note-mark {font-size:28px;color:#faff69;}
+.personal-note p {font:italic 18px Georgia,serif;color:#c7c8b5;}
+.signature {margin-left:auto;font:italic 24px Georgia,serif;color:#faff69;transform:rotate(-7deg);}
+.section-heading {margin-bottom:40px;}
+.section-heading .eyebrow {margin-bottom:12px;}
+.section-heading h2 {font-size:clamp(40px,6vw,72px);font-weight:400;letter-spacing:-3px;color:#f6f5e9;line-height:1.1;margin-bottom:16px;}
+.section-heading>p:last-child {font-size:14px;color:#b2b6a7;line-height:1.7;}
+.project-filters {display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;}
+.filter-btn {padding:10px 16px;border:1px solid #46503d;background:none;color:#c1c6b6;font-size:12px;cursor:pointer;border-radius:30px;}
+.filter-btn.selected {background:#faff69;border-color:#faff69;color:#14190f;}
+.project-card {background:#191d16;border-radius:3px;position:relative;padding:28px !important;transition:transform .2s,border-color .2s;}
+.project-card:hover {transform:translateY(-4px);border-color:#faff69 !important;}
+.project-card h3 {font-size:22px;letter-spacing:-.5px;line-height:1.25;}
+.project-number {font:10px monospace;color:#faff69;letter-spacing:1px;margin-bottom:22px;display:block;}
+.project-desc {font-size:13px;line-height:1.8;color:#b4b8aa !important;}
+.project-meta {font-size:10px;}
+.project-link {font-size:11px;}
+#page-2 .space-y-6 {counter-reset:about;display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+#page-2 .space-y-6>* {margin-top:0;background:#191d16;border-radius:3px;}
+#page-2 .space-y-6>div:before {counter-increment:about;content:"0" counter(about);display:block;font:12px monospace;color:#faff69;margin-bottom:20px;}
+#page-3 article {border-radius:3px;background:#191d16;transition:transform .2s;}
+#page-3 article:hover {transform:translateY(-4px);}
+#page-4 .border {background:#191d16;border-radius:3px;}
+button:focus-visible,a:focus-visible {outline:2px solid #faff69;outline-offset:5px;}
+@media(max-width:800px) {
+#main-content nav {padding:16px 22px;gap:12px;flex-wrap:wrap;}
+#nav-menu {gap:16px;}
+.hero-layout {grid-template-columns:1fr;gap:48px;}
+.hero-copy {max-width:600px;}
+.specimen-card {max-width:440px;margin:0 auto;width:calc(100% - 20px);}
+.hero-name {font-size:108px;}
+}
+@media(max-width:480px) {
+#main-content nav {padding:12px 20px;gap:8px;}
+.brand-mark {font-size:26px;}
+#nav-menu {width:100%;justify-content:space-between;gap:8px;}
+.nav-btn {font-size:9px;letter-spacing:.5px;}
+.page {padding-top:130px !important;padding-left:22px;padding-right:22px;}
+.hero-name {font-size:88px;letter-spacing:-5px;}
+.hero-statement {font-size:38px;}
+.hero-description {font-size:13px;}
+.practice-strip {grid-template-columns:1fr;margin-top:44px;}
+.practice-item {border-right:0;border-bottom:1px solid #41483a;padding:22px 0;}
+.practice-item:last-child {border-bottom:0;}
+.personal-note {gap:10px;}
+.personal-note p {font-size:15px;}
+.signature {font-size:20px;}
+#page-2 .space-y-6 {grid-template-columns:1fr;}
+.section-heading h2 {letter-spacing:-2px;}
+}
+@media(prefers-reduced-motion:reduce) {
+*,*:before,*:after {animation:none !important;transition:none !important;scroll-behavior:auto !important;}
+}
