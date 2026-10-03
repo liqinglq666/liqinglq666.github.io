@@ -16,7 +16,7 @@ const app = (() => {
   const state = {
     currentPage: 0,
     totalPages: 5,
-    showSplash: true,
+    showSplash: false,
     animateLetters: false,
     expandedCard: null,
     isNavigating: false,
@@ -171,6 +171,8 @@ const app = (() => {
       page.style.opacity = isCurrentPage ? '1' : '0';
       page.style.pointerEvents = isCurrentPage ? 'auto' : 'none';
       page.style.zIndex = isCurrentPage ? '100' : '0';
+      page.inert = !isCurrentPage;
+      page.setAttribute('aria-hidden', String(!isCurrentPage));
 
       if (isCurrentPage) {
         page.style.transform = 'rotateY(0deg) scale(1)';
@@ -209,12 +211,13 @@ const app = (() => {
     }
   };
 
-  const renderProjects = () => {
+  const renderProjects = (filter = "All") => {
     const grid = document.getElementById('projects-grid');
     if (!grid) return;
 
-    grid.innerHTML = projects.map((project) => `
+    grid.innerHTML = projects.filter(project => filter === "All" || project.tags[0] === filter).map((project) => `
       <div class="project-card border p-6 sm:p-8 rounded-lg transition-all hover:border-yellow-300" style="border-color: rgba(65, 65, 65, 0.8);">
+        <span class="project-number">WORK / ${String(projects.indexOf(project) + 1).padStart(2, "0")}</span>
         <div class="project-card-header">
           <p class="project-meta">${project.language} · ${project.tags[0]}</p>
           <h3 class="text-base sm:text-lg font-bold" style="color: #ffffff; font-weight: 700;">
@@ -422,6 +425,10 @@ const app = (() => {
   // ========================================================================
 
   const setupEventListeners = () => {
+    document.querySelectorAll(".filter-btn").forEach(btn => btn.addEventListener("click", () => {
+      document.querySelectorAll(".filter-btn").forEach(item => { const selected = item === btn; item.classList.toggle("selected", selected); item.setAttribute("aria-pressed", String(selected)); });
+      renderProjects(btn.dataset.filter);
+    }));
     // Navigation buttons (Top menu)
     document.querySelectorAll('.nav-btn').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -510,21 +517,6 @@ const app = (() => {
       }
     });
 
-    // Scroll wheel for page navigation
-    let wheelTimeout;
-    document.addEventListener('wheel', (e) => {
-      if (state.showSplash) return;
-
-      clearTimeout(wheelTimeout);
-      wheelTimeout = setTimeout(() => {
-        if (e.deltaY > 0) {
-          nextPage();
-        } else if (e.deltaY < 0) {
-          prevPage();
-        }
-      }, 50);
-    }, { passive: true });
-
     // Touch/swipe support
     let touchStartX = 0;
     document.addEventListener('touchstart', (e) => {
@@ -558,7 +550,7 @@ const app = (() => {
     updateGrowthCardStates();
 
     // Splash screen logic - 立即触发动画
-    triggerSplashAnimation();
+    // Open directly on the homepage.
 
     // 8秒后自动隐藏 splash（如果用户没有手动关闭）
     setTimeout(() => {
