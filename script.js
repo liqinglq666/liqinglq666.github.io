@@ -287,7 +287,7 @@ const app = (() => {
     container.style.alignItems = 'center';
     container.style.justifyContent = 'center';
 
-    const text = 'Li Qing';
+    const text = 'Liqing.';
 
     // 创建或获取样式
     let styleEl = document.getElementById('splash-bounce-style');
@@ -312,7 +312,7 @@ const app = (() => {
       span.style.animation = `staggerBounce 1000ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards`;
       span.style.animationDelay = `${index * 80}ms`;
       span.style.color = '#faff69';
-      span.style.textShadow = '0 0 30px rgba(250, 255, 105, 0.6), 0 0 60px rgba(250, 255, 105, 0.3)';
+      span.style.textShadow = 'none';
       span.style.letterSpacing = 'inherit';
       container.appendChild(span);
     });
@@ -402,7 +402,7 @@ const app = (() => {
       };
 
       // 设置视频源并加载
-      video.src = './assets/splash-intro.mp4';
+      video.src = './assets/liqing-orbit-intro-1080p.mp4';
       video.load();
     } else {
       console.log('No video element - text animation only');

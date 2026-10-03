@@ -6,13 +6,13 @@
   <title>Liqing — Experiments, Tools &amp; Notes</title>
   <meta name="description" content="Liqing’s personal portfolio: composite materials research, scientific computing, and practical tutorials.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23000'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Arial,sans-serif' font-size='28' font-weight='700' fill='%23faff69'%3ELQ%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="style.css?v=research-20261003-v4">
+  <link rel="stylesheet" href="style.css?v=orbit-20261003-v5">
 </head>
 <body>
   <div id="app" class="w-full h-screen overflow-hidden" style="background: #000000;">
     <div id="splash" class="fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-600" style="background: #000000;">
-      <video id="splash-video" autoplay muted class="w-full h-full object-cover absolute inset-0" style="display: none;">
-        <source src="./assets/splash-intro.mp4" type="video/mp4">
+      <video id="splash-video" autoplay muted playsinline preload="auto" class="w-full h-full object-cover absolute inset-0" style="display: none; width:100%; height:100%; object-fit:cover;">
+        <source src="./assets/liqing-orbit-intro-1080p.mp4" type="video/mp4">
       </video>
       <div class="absolute inset-0" style="background: rgba(0, 0, 0, 0.3);"></div>
       <div id="hero-text" style="
@@ -56,7 +56,7 @@
 <div class="hero-copy"><p class="eyebrow"><span class="status-dot"></span> LIQING / PERSONAL PORTFOLIO</p>
 <h1 class="hero-name">Li<span class="name-serif">qing</span><span class="name-dot">.</span></h1>
 <p class="hero-statement">Experiment.<br>Build. <span>Share.</span></p>
-<p class="hero-description">I’m a master’s student at Sun Yat-sen University exploring fiber-reinforced composites and scientific computing. I turn research questions into tools — and what I learn into practical notes.</p>
+<p class="hero-description">Most of these tools began with a problem on my own research desk. I keep them here, alongside the notes I wish I’d had when I started.</p>
 <div class="hero-actions"><button class="goto-page-btn action-primary" data-page="1">Explore my work ↗</button><button class="goto-page-btn action-secondary" data-page="3">Open my notebooks ↗</button></div>
 </div>
 <aside class="specimen-card" aria-label="Abstract artwork inspired by fibers and connections">
@@ -122,6 +122,6 @@
       </div>
     </div>
   </div>
-  <script src="script.js?v=research-20261003-v4"></script>
+  <script src="script.js?v=orbit-20261003-v5"></script>
 </body>
 </html>
