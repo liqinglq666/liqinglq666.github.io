@@ -64,6 +64,37 @@ const app = (() => {
       "Characterization",
       "Data Analysis"
     ]
+  },
+  {
+    "title": "ECC Analyzer Pro",
+    "url": "https://github.com/liqinglq666/ECC_Analyzer_Pro",
+    "desc": "Batch analysis of tensile and compressive test data, with curve metrics, energy indicators, and Excel reports.",
+    "language": "Python",
+    "tags": [
+      "Mechanics",
+      "Mechanical Testing"
+    ]
+  },
+  {
+    "title": "Hydration Kinetics Pro",
+    "url": "https://github.com/liqinglq666/Hydration-Kinetics-Pro",
+    "desc": "Isothermal calorimetry processing, apparent kinetic modeling, and traceable data visualization.",
+    "language": "Python",
+    "tags": [
+      "Data Analysis",
+      "Calorimetry",
+      "Kinetics"
+    ]
+  },
+  {
+    "title": "GRA MicroAnalyzer",
+    "url": "https://github.com/liqinglq666/GRA_micro_analyzer",
+    "desc": "Grey relational analysis of microstructure–property associations, with data checks and auditable outputs.",
+    "language": "Python",
+    "tags": [
+      "Data Analysis",
+      "Grey Relational Analysis"
+    ]
   }
 ];
 
