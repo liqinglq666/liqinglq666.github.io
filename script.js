@@ -402,7 +402,7 @@ const app = (() => {
       };
 
       // 设置视频源并加载
-      video.src = './assets/liqing-orbit-intro-1080p.mp4';
+      video.src = './assets/splash-intro.mp4';
       video.load();
     } else {
       console.log('No video element - text animation only');
