@@ -512,19 +512,24 @@ const app = (() => {
     });
 
     // Touch/swipe support
-    let touchStartX = 0;
+    let swipeStart = null;
     document.addEventListener('touchstart', (e) => {
-      touchStartX = e.touches[0].clientX;
-    });
+      swipeStart = null;
+      if (state.showSplash || e.touches.length !== 1 ||
+          e.target.closest('a, button, input, textarea, select, [contenteditable="true"]')) return;
+      swipeStart = {x:e.touches[0].clientX, y:e.touches[0].clientY};
+    }, {passive:true});
 
     document.addEventListener('touchend', (e) => {
-      const touchEndX = e.changedTouches[0].clientX;
-      if (touchStartX - touchEndX > 50) {
-        nextPage();
-      } else if (touchEndX - touchStartX > 50) {
-        prevPage();
-      }
-    });
+      if (!swipeStart || !e.changedTouches.length) return;
+      const dx = e.changedTouches[0].clientX - swipeStart.x;
+      const dy = e.changedTouches[0].clientY - swipeStart.y;
+      swipeStart = null;
+      if (Math.abs(dx) < 70 || Math.abs(dx) < Math.abs(dy) * 1.4) return;
+      if (dx < 0) nextPage();
+      else prevPage();
+    }, {passive:true});
+    document.addEventListener('touchcancel', () => { swipeStart = null; }, {passive:true});
   };
 
   // ========================================================================
