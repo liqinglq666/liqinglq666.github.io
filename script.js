@@ -16,7 +16,7 @@ const app = (() => {
   const state = {
     currentPage: 0,
     totalPages: 5,
-    showSplash: false,
+    showSplash: true,
     animateLetters: false,
     expandedCard: null,
     isNavigating: false,
@@ -26,57 +26,12 @@ const app = (() => {
 
   const projects = [
   {
-    "title": "PerfectDay AI",
-    "url": "https://github.com/liqinglq666/perfectday-ai",
-    "desc": "An AI journey companion combining intent understanding, constrained planning, and dynamic itinerary updates.",
-    "language": "TypeScript",
-    "tags": [
-      "AI Applications",
-      "Planning",
-      "PWA"
-    ],
-    "demo": "https://perfectday-ai.vercel.app"
-  },
-  {
-    "title": "Yuejian Heritage Agent",
-    "url": "https://github.com/liqinglq666/Yuejian-Feiyi-Agent",
-    "desc": "A knowledge-based assistant for cultural exploration, travel planning, and storytelling.",
-    "language": "Python",
-    "tags": [
-      "AI Applications",
-      "Retrieval",
-      "Culture"
-    ],
-    "demo": "https://yuejian-feiyi-agent.streamlit.app/"
-  },
-  {
-    "title": "SmartPact",
-    "url": "https://github.com/liqinglq666/-ai-",
-    "desc": "A document review system for comparing contract terms and tracing findings to source pages.",
-    "language": "Python / TypeScript",
-    "tags": [
-      "AI Applications",
-      "Document Review"
-    ]
-  },
-  {
-    "title": "ZhiLink Tianhe",
-    "url": "https://github.com/liqinglq666/zhilink-tianhe-enterprise-ai-workspace",
-    "desc": "An AI workspace connecting meeting notes, document review, policies, and execution workflows.",
-    "language": "Python",
-    "tags": [
-      "AI Applications",
-      "Workflows"
-    ],
-    "demo": "https://zhilink-tianhe-ai-workspace.onrender.com"
-  },
-  {
     "title": "Composite Micromechanics Calculator",
     "url": "https://github.com/liqinglq666/ECC-Micromechanics-Calculator",
     "desc": "A desktop tool for fiber–matrix interface mechanics, fiber bridging, and strain-hardening assessment.",
     "language": "Python",
     "tags": [
-      "Scientific Tools",
+      "Mechanics",
       "Micromechanics"
     ]
   },
@@ -86,7 +41,7 @@ const app = (() => {
     "desc": "LF-NMR spectrum processing for pore structure analysis and classification.",
     "language": "Python",
     "tags": [
-      "Scientific Tools",
+      "Characterization",
       "LF-NMR"
     ]
   },
@@ -96,7 +51,7 @@ const app = (() => {
     "desc": "Cracking behavior analysis and experimental data export for research workflows.",
     "language": "Python",
     "tags": [
-      "Scientific Tools",
+      "Characterization",
       "DIC"
     ]
   },
@@ -106,7 +61,7 @@ const app = (() => {
     "desc": "Thermogravimetric data processing and visualization for materials research.",
     "language": "Python",
     "tags": [
-      "Scientific Tools",
+      "Characterization",
       "Data Analysis"
     ]
   }
@@ -198,6 +153,7 @@ const app = (() => {
     const mainContent = document.getElementById('main-content');
     const splash = document.getElementById('splash');
 
+    mainContent.inert = state.showSplash;
     splash.inert = !state.showSplash;
     splash.setAttribute('aria-hidden', String(!state.showSplash));
     if (state.showSplash) {
@@ -447,6 +403,11 @@ const app = (() => {
       });
     });
 
+    document.getElementById('replay-intro')?.addEventListener('click', () => {
+      setState({showSplash:true});
+      triggerSplashAnimation();
+      setTimeout(() => { if(state.showSplash) hideSplash(); },8000);
+    });
     // Splash enter button
     const splashEnterBtn = document.getElementById('splash-enter-btn');
     if (splashEnterBtn) {
@@ -552,7 +513,7 @@ const app = (() => {
     updateGrowthCardStates();
 
     // Splash screen logic - 立即触发动画
-    // Open directly on the homepage.
+    triggerSplashAnimation();
 
     // 8秒后自动隐藏 splash（如果用户没有手动关闭）
     setTimeout(() => {
