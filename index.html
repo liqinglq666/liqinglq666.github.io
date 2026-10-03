@@ -122,6 +122,115 @@
       </div>
     </div>
   </div>
+
+<style>
+#page-0 {padding-bottom:120px}
+.lq-companion{position:fixed;right:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));z-index:45;display:flex;align-items:flex-end;gap:10px}
+.lq-companion[hidden]{display:none}
+.lq-cat{width:96px;height:104px;border:0;padding:0;background:transparent;cursor:pointer;touch-action:manipulation;border-radius:22px}
+.lq-cat:focus-visible{outline:2px solid #faff69;outline-offset:5px}
+.lq-cat svg{width:100%;height:100%;display:block;overflow:visible}
+.lq-cat-head{transform-origin:60px 62px;transition:transform 180ms ease-out}
+.lq-eye{transform-box:fill-box;transform-origin:center;transition:transform 90ms ease}
+.lq-cat.blink .lq-eye{transform:scaleY(.06)}
+.lq-cat.pet .lq-cat-head{animation:lq-nod 450ms ease}
+.lq-cat-label{fill:#f5f4e8;font:italic 11px Georgia,serif}
+.lq-cat-note{max-width:180px;color:#f5f4e8;background:#202b22;border:1px solid #435345;border-radius:14px 14px 0 14px;padding:10px 13px;font:12px/1.5 Arial,sans-serif;margin-bottom:32px}
+.lq-cat-note:empty{display:none}
+@keyframes lq-nod{0%,100%{transform:rotate(0)}35%{transform:rotate(-8deg) translateY(-4px)}70%{transform:rotate(5deg)}}
+@media(max-width:600px){.lq-cat{width:72px;height:80px}.lq-companion{right:12px;bottom:12px}.lq-cat-note{max-width:155px;margin-bottom:20px}}
+@media(prefers-reduced-motion:reduce){.lq-cat-head,.lq-eye{transition:none}.lq-cat.pet .lq-cat-head{animation:none}}
+</style>
+<div id="lq-companion" class="lq-companion" hidden>
+<span id="lq-cat-note" class="lq-cat-note" role="status" aria-live="polite"></span>
+<button id="lq-cat" class="lq-cat" type="button" aria-label="Pet Liqing's black cat" title="A curious little companion. Tap to say hello.">
+<svg viewBox="0 0 120 130" aria-hidden="true">
+<defs><clipPath id="lq-left-eye"><path d="M31 57L53 61Q51 76 40 73Q31 71 31 57Z"/></clipPath><clipPath id="lq-right-eye"><path d="M66 60L90 50Q91 67 80 70Q70 71 66 60Z"/></clipPath></defs>
+<rect x="5" y="9" width="110" height="110" rx="28" fill="#00e978"/>
+<path d="M47 95Q79 77 103 99L113 119H43Z" fill="#080b09"/>
+<g class="lq-cat-head">
+<path d="M24 55Q15 12 27 23L52 43Q65 35 78 39L94 14Q105 4 108 55Q117 89 99 102Q69 119 37 99Q15 84 24 55Z" fill="#080b09"/>
+<g class="lq-eye"><path d="M31 57L53 61Q51 76 40 73Q31 71 31 57Z" fill="#fffdeb"/><g clip-path="url(#lq-left-eye)"><ellipse class="lq-pupil" cx="44" cy="65" rx="3" ry="7" fill="#080b09"/></g></g>
+<g class="lq-eye"><path d="M66 60L90 50Q91 67 80 70Q70 71 66 60Z" fill="#fffdeb"/><g clip-path="url(#lq-right-eye)"><ellipse class="lq-pupil" cx="78" cy="60" rx="3" ry="7" fill="#080b09"/></g></g>
+<path d="M56 73Q61 69 66 73L60 78Z" fill="#303a34"/><path d="M69 84L77 79L75 91Z" fill="#fffdeb"/>
+<g stroke="#303a34" stroke-width="3" stroke-linecap="round"><path d="M30 79L9 74M30 85L6 87M32 92L13 103M93 74L115 65M96 80L119 79M95 87L116 94"/></g>
+</g>
+<text x="84" y="111" fill="#00e978" font-size="17" font-family="Georgia,serif" font-style="italic">lq</text>
+<text x="60" y="129" text-anchor="middle" class="lq-cat-label">Liqing.</text>
+</svg>
+</button>
+</div>
+
   <script src="script.js?v=original-20261003-v6"></script>
+
+<script>
+(() => {
+  const initCompanion = () => {
+    const companion = document.getElementById('lq-companion');
+    const cat = document.getElementById('lq-cat');
+    const note = document.getElementById('lq-cat-note');
+    const head = cat.querySelector('.lq-cat-head');
+    const pupils = cat.querySelectorAll('.lq-pupil');
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    let blinkTimer, reopenTimer, noteTimer, petTimer, frame = 0, phrase = 0;
+    const visible = () => !companion.hidden && !document.hidden;
+    const blink = () => {
+      if (!visible() || reduced.matches) return;
+      cat.classList.add('blink');
+      clearTimeout(reopenTimer);
+      reopenTimer = setTimeout(() => cat.classList.remove('blink'), 140);
+    };
+    const scheduleBlink = () => {
+      clearTimeout(blinkTimer);
+      if (!visible() || reduced.matches) return;
+      blinkTimer = setTimeout(() => { blink(); scheduleBlink(); }, 2800 + Math.random() * 4200);
+    };
+    const resetGaze = () => {
+      head.style.transform = '';
+      pupils.forEach(pupil => pupil.removeAttribute('transform'));
+    };
+    const sync = () => {
+      const state = app.getState();
+      companion.hidden = state.showSplash || state.currentPage !== 0;
+      if (!visible()) {
+        clearTimeout(blinkTimer); clearTimeout(reopenTimer);
+        clearTimeout(noteTimer); clearTimeout(petTimer);
+        if (frame) { cancelAnimationFrame(frame); frame = 0; }
+        cat.classList.remove('blink', 'pet'); note.textContent = ''; resetGaze();
+      } else scheduleBlink();
+    };
+    app.subscribe(sync);
+    document.addEventListener('visibilitychange', sync);
+    reduced.addEventListener('change', () => { resetGaze(); sync(); });
+    document.addEventListener('pointermove', event => {
+      if (!visible() || reduced.matches || event.pointerType === 'touch' || frame) return;
+      const x = event.clientX, y = event.clientY;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        if (!visible()) return;
+        const rect = cat.getBoundingClientRect();
+        const dx = Math.max(-1, Math.min(1, (x - rect.left - rect.width / 2) / 280));
+        const dy = Math.max(-1, Math.min(1, (y - rect.top - rect.height / 2) / 220));
+        pupils.forEach(pupil => pupil.setAttribute('transform', 'translate(' + dx * 4 + ' ' + dy * 3 + ')'));
+        head.style.transform = 'rotate(' + dx * 3 + 'deg)';
+      });
+    }, {passive:true});
+    document.documentElement.addEventListener('pointerleave', resetGaze);
+    ['touchstart', 'touchend'].forEach(type => cat.addEventListener(type, event => event.stopPropagation(), {passive:true}));
+    cat.addEventListener('click', () => {
+      const phrases = ['Curiosity never clocks out.', 'A little less routine. A little more discovery.', 'Still thinking about that plot.', 'Hello from Liqing’s desk.'];
+      note.textContent = phrases[phrase++ % phrases.length];
+      clearTimeout(noteTimer); noteTimer = setTimeout(() => { note.textContent = ''; }, 3200);
+      blink();
+      cat.classList.remove('pet'); void cat.offsetWidth; cat.classList.add('pet');
+      clearTimeout(petTimer); petTimer = setTimeout(() => cat.classList.remove('pet'), 500);
+    });
+    sync();
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initCompanion);
+  else initCompanion();
+})();
+</script>
+
 </body>
 </html>
