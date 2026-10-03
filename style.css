@@ -972,3 +972,6 @@ button:focus-visible,a:focus-visible {outline:2px solid #faff69;outline-offset:5
 @media(prefers-reduced-motion:reduce) {
 *,*:before,*:after {animation:none !important;transition:none !important;scroll-behavior:auto !important;}
 }
+
+#main-content nav {top:0;left:0;right:0;width:100%;z-index:1000;}
+.practice-item:hover {transform:none;}
