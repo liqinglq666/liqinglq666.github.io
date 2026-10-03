@@ -134,7 +134,7 @@ const app = (() => {
   };
 
   let splashTimer = null;
-  const introSessionKey = 'liqing-cat-intro-v1';
+  const introSessionKey = 'liqing-original-cat-intro-v2';
   const hideSplash = () => {
     clearTimeout(splashTimer);
     const video = document.getElementById('splash-video');
@@ -302,7 +302,7 @@ const app = (() => {
       // Keep the static poster and immediately available skip button.
       splashTimer = setTimeout(hideSplash, 1800);
     };
-    splashTimer = setTimeout(hideSplash, 6000);
+    splashTimer = setTimeout(hideSplash, 8000);
     if (reducedMotion) {
       // A quiet title card replaces the moving sequence.
       splashTimer = setTimeout(hideSplash, 1800);
