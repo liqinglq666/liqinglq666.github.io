@@ -287,14 +287,17 @@ const app = (() => {
   // ANIMATIONS
   // ========================================================================
 
-  const triggerSplashAnimation = () => {
+  const triggerSplashAnimation = (replay = false) => {
     clearTimeout(splashTimer);
     const video = document.getElementById('splash-video');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!video) { hideSplash(); return; }
     video.pause();
     video.currentTime = 0;
-    video.onended = hideSplash;
+    video.onended = () => {
+      if (replay) clearTimeout(splashTimer);
+      else hideSplash();
+    };
     video.onerror = () => {
       // Keep the static poster and immediately available skip button.
       splashTimer = setTimeout(hideSplash, 1800);
@@ -339,7 +342,7 @@ const app = (() => {
 
     document.getElementById('replay-intro')?.addEventListener('click', () => {
       setState({showSplash:true});
-      triggerSplashAnimation();
+      triggerSplashAnimation(true);
 
     });
     // Splash enter button
