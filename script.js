@@ -198,6 +198,8 @@ const app = (() => {
     const mainContent = document.getElementById('main-content');
     const splash = document.getElementById('splash');
 
+    splash.inert = !state.showSplash;
+    splash.setAttribute('aria-hidden', String(!state.showSplash));
     if (state.showSplash) {
       mainContent.style.opacity = '0';
       mainContent.style.pointerEvents = 'none';
