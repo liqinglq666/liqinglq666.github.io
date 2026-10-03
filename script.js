@@ -133,8 +133,17 @@ const app = (() => {
     }
   };
 
+  let splashTimer = null;
+  const introSessionKey = 'liqing-cat-intro-v1';
   const hideSplash = () => {
+    clearTimeout(splashTimer);
+    const video = document.getElementById('splash-video');
+    video?.pause();
+    try { sessionStorage.setItem(introSessionKey, 'seen'); } catch (_) {}
     setState({ showSplash: false });
+    if (document.getElementById('splash')?.contains(document.activeElement)) {
+      document.querySelector('.nav-btn[data-page="0"]')?.focus({preventScroll:true});
+    }
   };
 
   const toggleGrowthCard = (cardIndex) => {
@@ -278,135 +287,29 @@ const app = (() => {
   // ANIMATIONS
   // ========================================================================
 
-  const initializeStaggeredBounce = () => {
-    const container = document.getElementById('hero-text');
-    if (!container) return;
-
-    container.innerHTML = '';
-    container.style.display = 'flex';
-    container.style.alignItems = 'center';
-    container.style.justifyContent = 'center';
-
-    const text = 'Liqing.';
-
-    // 创建或获取样式
-    let styleEl = document.getElementById('splash-bounce-style');
-    if (!styleEl) {
-      styleEl = document.createElement('style');
-      styleEl.id = 'splash-bounce-style';
-      styleEl.textContent = `
-        @keyframes staggerBounce {
-          0% { transform: translateY(-80px) scaleY(0.85); opacity: 0; }
-          60% { transform: translateY(10px) scaleY(1.05); opacity: 1; }
-          80% { transform: translateY(-5px) scaleY(0.95); }
-          100% { transform: translateY(0) scaleY(1); opacity: 1; }
-        }
-      `;
-      document.head.appendChild(styleEl);
-    }
-
-    Array.from(text).forEach((char, index) => {
-      const span = document.createElement('span');
-      span.textContent = char;
-      span.style.display = 'inline-block';
-      span.style.animation = `staggerBounce 1000ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards`;
-      span.style.animationDelay = `${index * 80}ms`;
-      span.style.color = '#faff69';
-      span.style.textShadow = 'none';
-      span.style.letterSpacing = 'inherit';
-      container.appendChild(span);
-    });
-  };
-
-  const showSplashButton = () => {
-    const enterBtn = document.getElementById('splash-enter-btn');
-    if (enterBtn) {
-      // 确保按钮在文字下方，不重叠
-      enterBtn.style.position = 'absolute';
-      enterBtn.style.bottom = '80px';  // 从底部留空间
-      enterBtn.style.left = '50%';
-      enterBtn.style.transform = 'translateX(-50%)';
-      enterBtn.style.zIndex = '10';  // 确保按钮在视频上，但...在更低位置
-
-      // 渐显
-      enterBtn.style.opacity = '0';
-      enterBtn.style.pointerEvents = 'auto';
-
-      // 强制重排以应用样式
-      void enterBtn.offsetHeight;
-
-      // 立即淡入
-      enterBtn.style.transition = 'opacity 600ms ease-out';
-      enterBtn.style.opacity = '1';
-
-      console.log('Splash button positioned and shown');
-    }
-  };
-
   const triggerSplashAnimation = () => {
+    clearTimeout(splashTimer);
     const video = document.getElementById('splash-video');
-    const container = document.getElementById('hero-text');
-    const enterBtn = document.getElementById('splash-enter-btn');
-
-    // 初始化按钮状态 - 确保在屏幕底部，不可见
-    if (enterBtn) {
-      enterBtn.style.position = 'absolute';
-      enterBtn.style.bottom = '80px';
-      enterBtn.style.left = '50%';
-      enterBtn.style.transform = 'translateX(-50%)';
-      enterBtn.style.zIndex = '10';
-      enterBtn.style.opacity = '0';
-      enterBtn.style.pointerEvents = 'none';
-      enterBtn.style.transition = 'opacity 600ms ease-out';
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!video) { hideSplash(); return; }
+    video.pause();
+    video.currentTime = 0;
+    video.onended = hideSplash;
+    video.onerror = () => {
+      // Keep the static poster and immediately available skip button.
+      splashTimer = setTimeout(hideSplash, 1800);
+    };
+    splashTimer = setTimeout(hideSplash, 6000);
+    if (reducedMotion) {
+      // A quiet title card replaces the moving sequence.
+      splashTimer = setTimeout(hideSplash, 1800);
+      return;
     }
-
-    // 立即显示文字动画（不管视频是否存在）
-    state.animateLetters = true;
-    container.style.display = 'flex';
-    container.style.zIndex = '20';  // 确保文字在最上面
-    initializeStaggeredBounce();
-
-    console.log('Starting splash animation - text visible');
-
-    // 1.2秒后显示进入按钮
-    setTimeout(() => {
-      showSplashButton();
-      console.log('Splash button shown');
-    }, 1200);
-
-    // 尝试播放视频作为背景（不隐藏文字）
-    if (video) {
-      console.log('Attempting to load video...');
-      video.style.display = 'block';
-      video.style.opacity = '1';
-      video.style.zIndex = '1';  // 视频最后
-      container.style.zIndex = '20'; // 文字在最前面
-
-      const videoTimeout = setTimeout(() => {
-        console.log('Video load timeout - keeping text animation');
-      }, 3000);
-
-      // 视频加载完成后播放
-      video.onloadedmetadata = () => {
-        clearTimeout(videoTimeout);
-        console.log('Video loaded - attempting to play');
-        video.play().catch((err) => {
-          console.log('Autoplay blocked or video play failed:', err);
-        });
-      };
-
-      video.onerror = () => {
-        clearTimeout(videoTimeout);
-        console.log('Video load error - text animation continues');
-        video.style.display = 'none';
-      };
-
-      // 设置视频源并加载
-      video.src = './assets/splash-intro.mp4';
-      video.load();
-    } else {
-      console.log('No video element - text animation only');
-    }
+    video.play().catch(() => {
+      // Autoplay restrictions must never trap a visitor on the intro.
+      clearTimeout(splashTimer);
+      splashTimer = setTimeout(hideSplash, 1800);
+    });
   };
 
   // ========================================================================
@@ -437,7 +340,7 @@ const app = (() => {
     document.getElementById('replay-intro')?.addEventListener('click', () => {
       setState({showSplash:true});
       triggerSplashAnimation();
-      setTimeout(() => { if(state.showSplash) hideSplash(); },8000);
+
     });
     // Splash enter button
     const splashEnterBtn = document.getElementById('splash-enter-btn');
@@ -548,15 +451,10 @@ const app = (() => {
     updatePageDisplay();
     updateGrowthCardStates();
 
-    // Splash screen logic - 立即触发动画
-    triggerSplashAnimation();
-
-    // 8秒后自动隐藏 splash（如果用户没有手动关闭）
-    setTimeout(() => {
-      if (state.showSplash) {
-        hideSplash();
-      }
-    }, 8000);
+    let seen = false;
+    try { seen = sessionStorage.getItem(introSessionKey) === 'seen'; } catch (_) {}
+    if (seen) hideSplash();
+    else triggerSplashAnimation();
   };
 
   // ========================================================================

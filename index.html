@@ -72,30 +72,24 @@
   .lq-cat-note{top:calc(100% + 48px);max-width:calc(100vw - 32px)}
 }
 </style>
+<style id="liqing-cat-intro">
+#splash{background:#000;overflow:hidden}
+#splash-video{position:absolute;width:100%;height:100%;inset:0;object-fit:contain;display:block}
+#splash-enter-btn{position:absolute;bottom:max(32px,calc(20px + env(safe-area-inset-bottom)));left:50%;transform:translateX(-50%);z-index:20;min-height:44px;padding:12px 22px;background:transparent;color:#faff69;border:1px solid #53583a;border-radius:0;font:600 12px/1.4 Arial,sans-serif;letter-spacing:.6px;opacity:1;cursor:pointer}
+#splash-enter-btn:hover{background:#faff69;color:#000}
+#splash-enter-btn:focus-visible{outline:2px solid #faff69;outline-offset:4px}
+@media(max-width:639px){#splash-video{width:170%;max-width:none;left:50%;transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){#splash,#main-content{transition:none}}
+</style>
 </head>
 <body>
   <div id="app" class="w-full h-screen overflow-hidden" style="background: #000000;">
     <div id="splash" class="fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-600" style="background: #000000;">
-      <video id="splash-video" autoplay muted playsinline preload="auto" class="w-full h-full object-cover absolute inset-0" style="display: none; width:100%; height:100%; object-fit:cover;">
-        <source src="./assets/splash-intro.mp4" type="video/mp4">
+      <video id="splash-video" muted playsinline preload="auto" poster="./assets/liqing-cat-intro-poster.png" aria-label="A pixel cat jumps onto Liqing's LQ monogram">
+        <source src="./assets/liqing-cat-intro.webm" type="video/webm">
+        <source src="./assets/liqing-cat-intro.mp4" type="video/mp4">
       </video>
-      <div class="absolute inset-0" style="background: rgba(0, 0, 0, 0.3);"></div>
-      <div id="hero-text" style="
-        font-size: clamp(48px, 15vw, 96px);
-        font-family: 'Inter', sans-serif;
-        font-weight: 900;
-        text-align: center;
-        line-height: 1.0;
-        letter-spacing: -2px;
-        min-height: 100px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0 20px;
-        position: relative;
-        z-index: 10;
-      "></div>
-      <button id="splash-enter-btn" class="absolute bottom-12 left-1/2 -translate-x-1/2 px-8 py-3 font-bold text-sm rounded transition-all duration-200 hover:scale-110 active:scale-95" style="background: #faff69; color: #151515; border: 1px solid #faff69; cursor: pointer; z-index: 20; opacity: 0; pointer-events: none;">Step inside ↗</button>
+      <button id="splash-enter-btn" type="button">Skip intro ↗</button>
     </div>
 
     <div id="main-content" class="fixed inset-0 z-40 transition-opacity duration-600" style="opacity: 0; pointer-events: none;">
@@ -220,7 +214,7 @@
     </div>
   </div>
 
-  <script src="script.js?v=mobile-20261003-v7"></script>
+  <script src="script.js?v=cat-intro-20261003-v8"></script>
 
 
 <script>
