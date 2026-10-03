@@ -25,90 +25,94 @@ const app = (() => {
   const subscribers = [];
 
   const projects = [
-    {
-      title: 'ECC-Micromechanics-Calculator',
-      url: 'https://github.com/liqinglq666/ECC-Micromechanics-Calculator',
-      desc: 'Desktop-level computational engine for fiber-reinforced cementitious composites micromechanics and pseudo-strain-hardening performance prediction.',
-      language: 'Python',
-      updated: 'Jun 2026',
-      tags: ['ECC', 'Micromechanics', 'Composite Design']
-    },
-    {
-      title: 'NMR-Pore-Analyzer',
-      url: 'https://github.com/liqinglq666/NMR-Pore-Analyzer',
-      desc: 'Analyzes LF-NMR T2 spectra to extract pore size distributions, peak statistics, and classification metrics for cement-based materials research.',
-      language: 'Python',
-      updated: 'Jun 2026',
-      tags: ['LF-NMR', 'Pore Structure', 'Cement Materials']
-    },
-    {
-      title: 'GRA_micro_analyzer',
-      url: 'https://github.com/liqinglq666/GRA_micro_analyzer',
-      desc: 'Quantifies how microstructural factors such as porosity, hydration, and crystallinity influence macroscopic material performance.',
-      language: 'Python',
-      updated: 'May 2026',
-      tags: ['Grey Relational Analysis', 'Microstructure', 'Performance']
-    },
-    {
-      title: 'MatPropNet',
-      url: 'https://github.com/liqinglq666/MatPropNet',
-      desc: 'Automated, reproducible ML pipeline for materials science with nested cross-validation, Bayesian optimization, and SHAP-based physical attribution.',
-      language: 'Python',
-      updated: 'Apr 2026',
-      tags: ['Machine Learning', 'Bayesian Optimization', 'SHAP']
-    },
-    {
-      title: 'Hydration-Kinetics-Pro',
-      url: 'https://github.com/liqinglq666/Hydration-Kinetics-Pro',
-      desc: 'Physics-informed computational framework for complex cementitious hydration kinetics.',
-      language: 'Python',
-      updated: 'Apr 2026',
-      tags: ['Hydration Kinetics', 'Physics-Informed', 'Cement']
-    },
-    {
-      title: 'ECC_Analyzer_Pro',
-      url: 'https://github.com/liqinglq666/ECC_Analyzer_Pro',
-      desc: 'Automated, physics-informed tool for characterizing tensile and compressive properties of ECC/SHCC.',
-      language: 'Python',
-      updated: 'Apr 2026',
-      tags: ['Stress-Strain Analysis', 'ECC', 'Scientific Computing']
-    },
-    {
-      title: 'TGA_Analysis_Project',
-      url: 'https://github.com/liqinglq666/TGA_Analysis_Project',
-      desc: 'Python-based automated processing and visualization tool for thermogravimetric analysis data in materials science research.',
-      language: 'Python',
-      updated: 'Mar 2026',
-      tags: ['TGA', 'Automation', 'Data Analysis']
-    },
-    {
-      title: 'CrackVision-DIC',
-      url: 'https://github.com/liqinglq666/CrackVision-DIC',
-      desc: 'High-performance ECC/UHPC micro-cracking kinetics engine with an OriginLab-ready data pipeline.',
-      language: 'Python',
-      updated: 'Mar 2026',
-      tags: ['DIC', 'Microcracking', 'ECC/UHPC']
-    }
-  ];
+  {
+    "title": "PerfectDay AI",
+    "url": "https://github.com/liqinglq666/perfectday-ai",
+    "desc": "An AI journey companion combining intent understanding, constrained planning, and dynamic itinerary updates.",
+    "language": "TypeScript",
+    "tags": [
+      "AI Applications",
+      "Planning",
+      "PWA"
+    ],
+    "demo": "https://perfectday-ai.vercel.app"
+  },
+  {
+    "title": "Yuejian Heritage Agent",
+    "url": "https://github.com/liqinglq666/Yuejian-Feiyi-Agent",
+    "desc": "A knowledge-based assistant for cultural exploration, travel planning, and storytelling.",
+    "language": "Python",
+    "tags": [
+      "AI Applications",
+      "Retrieval",
+      "Culture"
+    ],
+    "demo": "https://yuejian-feiyi-agent.streamlit.app/"
+  },
+  {
+    "title": "SmartPact",
+    "url": "https://github.com/liqinglq666/-ai-",
+    "desc": "A document review system for comparing contract terms and tracing findings to source pages.",
+    "language": "Python / TypeScript",
+    "tags": [
+      "AI Applications",
+      "Document Review"
+    ]
+  },
+  {
+    "title": "ZhiLink Tianhe",
+    "url": "https://github.com/liqinglq666/zhilink-tianhe-enterprise-ai-workspace",
+    "desc": "An AI workspace connecting meeting notes, document review, policies, and execution workflows.",
+    "language": "Python",
+    "tags": [
+      "AI Applications",
+      "Workflows"
+    ],
+    "demo": "https://zhilink-tianhe-ai-workspace.onrender.com"
+  },
+  {
+    "title": "Composite Micromechanics Calculator",
+    "url": "https://github.com/liqinglq666/ECC-Micromechanics-Calculator",
+    "desc": "A desktop tool for fiber–matrix interface mechanics, fiber bridging, and strain-hardening assessment.",
+    "language": "Python",
+    "tags": [
+      "Scientific Tools",
+      "Micromechanics"
+    ]
+  },
+  {
+    "title": "NMR Pore Analyzer",
+    "url": "https://github.com/liqinglq666/NMR-Pore-Analyzer",
+    "desc": "LF-NMR spectrum processing for pore structure analysis and classification.",
+    "language": "Python",
+    "tags": [
+      "Scientific Tools",
+      "LF-NMR"
+    ]
+  },
+  {
+    "title": "CrackVision DIC",
+    "url": "https://github.com/liqinglq666/CrackVision-DIC",
+    "desc": "Cracking behavior analysis and experimental data export for research workflows.",
+    "language": "Python",
+    "tags": [
+      "Scientific Tools",
+      "DIC"
+    ]
+  },
+  {
+    "title": "TGA Analysis",
+    "url": "https://github.com/liqinglq666/TGA-Analysis-Project",
+    "desc": "Thermogravimetric data processing and visualization for materials research.",
+    "language": "Python",
+    "tags": [
+      "Scientific Tools",
+      "Data Analysis"
+    ]
+  }
+];
 
-  const growthCards = [
-    {
-      title: 'Personal Identity & Self-Discovery',
-      content: '很多人以为成长是给自己的系统打 Hotfix，哪里漏了补哪里。但我越来越觉得，我的奥德赛时期更像是一次推倒重来的内核重构。在这个阶段，我发现自己以前赖以生存的很多"默认配置"——那些从学校和家庭里继承来的价值观——在处理现实社会的复杂并发时，频繁出现 Deadlock。我必须亲手杀掉那些冗余的进程，去写属于我自己的底层协议。这过程并不优雅，甚至充满了报错和崩溃。但在每一次"我是谁"和"我该去哪"的反复博弈中，我开始理解：所谓的自我，不是被寻找出来的，而是通过一次次放弃舒适的旧代码，在那片名为"未知"的荒原上硬生生编译出来的。'
-    },
-    {
-      title: 'Technical Depth & Breadth',
-      content: 'From foundational materials science to cutting-edge AI methodologies. Developing both deep expertise in specific domains and broad understanding across disciplines to create innovative solutions.'
-    },
-    {
-      title: 'Research Innovation',
-      content: 'Pioneering approaches that combine traditional experimental characterization with modern machine learning. Building automated systems and physics-informed models that accelerate discovery and optimization.'
-    },
-    {
-      title: 'Communication & Collaboration',
-      content: 'Translating complex technical concepts into clear narratives. Working across interdisciplinary teams to bridge the gap between materials science and AI communities.'
-    }
-  ];
+  const growthCards = [];
 
   // ========================================================================
   // STATE MUTATIONS
@@ -212,7 +216,7 @@ const app = (() => {
     grid.innerHTML = projects.map((project) => `
       <div class="project-card border p-6 sm:p-8 rounded-lg transition-all hover:border-yellow-300" style="border-color: rgba(65, 65, 65, 0.8);">
         <div class="project-card-header">
-          <p class="project-meta">${project.language} · Updated ${project.updated}</p>
+          <p class="project-meta">${project.language} · ${project.tags[0]}</p>
           <h3 class="text-base sm:text-lg font-bold" style="color: #ffffff; font-weight: 700;">
             <a href="${project.url}" target="_blank" rel="noopener noreferrer" style="color: #faff69; text-decoration: none;" class="hover:opacity-80">
               ${project.title}
@@ -224,6 +228,7 @@ const app = (() => {
           ${project.tags.map(tag => `<span>${tag}</span>`).join('')}
         </div>
         <a class="project-link" href="${project.url}" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+        ${project.demo ? `<a class="project-link" href="${project.demo}" target="_blank" rel="noopener noreferrer">Live Demo →</a>` : ''}
       </div>
     `).join('');
   };
