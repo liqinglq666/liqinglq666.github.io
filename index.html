@@ -295,6 +295,7 @@
     const pupils = cat.querySelectorAll('.lq-pupil');
     const reduced = matchMedia('(prefers-reduced-motion: reduce)');
     let blinkTimer, reopenTimer, noteTimer, petTimer, frame = 0, phrase = 0;
+    let recentPets = [];
     const visible = () => !companion.hidden && !document.hidden;
     const resetGaze = () => pupils.forEach(pupil => pupil.removeAttribute('transform'));
     const blink = () => {
@@ -315,7 +316,7 @@
       if (!visible()) {
         clearTimeout(blinkTimer); clearTimeout(reopenTimer); clearTimeout(noteTimer); clearTimeout(petTimer);
         if (frame) { cancelAnimationFrame(frame); frame = 0; }
-        cat.classList.remove('blink', 'pet'); note.textContent = ''; resetGaze();
+        cat.classList.remove('blink', 'pet'); note.textContent = ''; recentPets = []; resetGaze();
       } else scheduleBlink();
     };
     app.subscribe(sync);
@@ -336,8 +337,19 @@
     document.documentElement.addEventListener('pointerleave', resetGaze);
     ['touchstart', 'touchend'].forEach(type => cat.addEventListener(type, event => event.stopPropagation(), {passive:true}));
     cat.addEventListener('click', () => {
-      const phrases = ['Good ideas need a little rest.', 'Keeping an eye on things.', 'Hello from Liqing’s desk.', 'Curiosity never clocks out.'];
-      note.textContent = phrases[phrase++ % phrases.length];
+      const phrases = [
+        'Nine lives. Zero plans.',
+        'You again. How unfortunate.',
+        'Your secrets are safe. I wasn’t listening.',
+        'Still alive. Terrible scheduling.',
+        'Pet me. It won’t fix you.'
+      ];
+      const now = performance.now();
+      recentPets = recentPets.filter(time => now - time <= 2000);
+      recentPets.push(now);
+      note.textContent = recentPets.length >= 3
+        ? 'We’ve discussed personal space.'
+        : phrases[phrase++ % phrases.length];
       clearTimeout(noteTimer); noteTimer = setTimeout(() => { note.textContent = ''; }, 3200);
       blink(); cat.classList.remove('pet'); void cat.offsetWidth; cat.classList.add('pet');
       clearTimeout(petTimer); petTimer = setTimeout(() => cat.classList.remove('pet'), 600);
