@@ -81,6 +81,37 @@
 @media(max-width:639px){#splash-video{width:170%;max-width:none;left:50%;transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){#splash,#main-content{transition:none}}
 </style>
+
+<style id="liqing-wall-cat">
+.cat-wall-card{background:#e7e8d8;border-color:#717660;color:#172019;transform:rotate(2deg);padding:22px}
+.cat-wall-card .specimen-label{color:#646b55}
+.cat-wall-card .specimen-caption{border-color:#b9beaa}
+.cat-wall-card .specimen-caption p{color:#172019}
+.cat-wall-card .specimen-caption span{color:#646b55}
+.wall-cat-button{display:block;width:100%;border:0;padding:0;margin:12px 0;background:transparent;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.wall-cat-button svg{display:block;width:100%;height:auto;overflow:hidden}
+.wall-cat-button:focus-visible{outline:2px dashed #52643f;outline-offset:4px}
+.wall-cat-body{transform-origin:230px 160px}
+.wall-cat-arm{transform-origin:260px 145px}
+.wall-cat-tail{transform-origin:263px 225px}
+.wall-cat-eyes{transform-origin:216px 145px}
+.wall-cat-scratches{stroke-dasharray:108;stroke-dashoffset:108;opacity:0}
+.wall-cat-shadow{transform-origin:235px 374px;opacity:.12}
+.wall-cat-button:hover .wall-cat-tail{animation:wall-tail 1.8s ease-in-out infinite}
+.wall-cat-button.is-sliding .wall-cat-body{animation:wall-slip 4.8s both}
+.wall-cat-button.is-sliding .wall-cat-arm{animation:wall-arm 4.8s both}
+.wall-cat-button.is-sliding .wall-cat-eyes{animation:wall-eyes 4.8s both}
+.wall-cat-button.is-sliding .wall-cat-scratches{animation:wall-scratch 4.8s both}
+.wall-cat-button.is-sliding .wall-cat-shadow{animation:wall-shadow 4.8s both}
+.wall-cat-button.is-sliding .wall-cat-tail{animation:wall-tail .5s ease-in-out 6}
+@keyframes wall-slip{0%,8%{transform:translate(0,0) rotate(0)}15%{transform:translate(-2px,9px) rotate(-3deg)}25%{transform:translate(3px,35px) rotate(3deg)}42%{transform:translate(0,104px) rotate(0)}49%{transform:translate(0,93px) scale(1.04,.96)}56%,76%{transform:translate(0,104px)}84%{transform:translate(0,67px) rotate(-4deg)}92%{transform:translate(0,27px) rotate(3deg)}100%{transform:translate(0,0)}}
+@keyframes wall-arm{0%,15%{transform:rotate(0)}42%,76%{transform:rotate(-42deg)}86%{transform:rotate(-12deg)}100%{transform:rotate(0)}}
+@keyframes wall-eyes{0%,45%,57%,68%,100%{transform:scaleY(1)}50%,53%,63%,66%{transform:scaleY(.08)}}
+@keyframes wall-scratch{0%,8%{stroke-dashoffset:108;opacity:0}16%{opacity:.65}42%,76%{stroke-dashoffset:0;opacity:.65}100%{stroke-dashoffset:0;opacity:0}}
+@keyframes wall-shadow{0%,100%{transform:scaleX(.65);opacity:.1}42%,76%{transform:scaleX(1.15);opacity:.22}}
+@keyframes wall-tail{0%,100%{transform:rotate(0)}50%{transform:rotate(8deg)}}
+@media(prefers-reduced-motion:reduce){.wall-cat-button.is-resting .wall-cat-body{transform:translateY(104px)}.wall-cat-button.is-resting .wall-cat-arm{transform:rotate(-42deg)}}
+</style>
 </head>
 <body>
   <div id="app" class="w-full h-screen overflow-hidden" style="background: #000000;">
@@ -150,10 +181,32 @@
 <p class="hero-description">Most of these tools began with a problem on my own research desk. I connect materials research, scientific computing, and AI to build reusable analysis workflows — and share the methods behind them.</p>
 <div class="hero-actions"><button class="goto-page-btn action-primary" data-page="1">Explore my work ↗</button><button class="goto-page-btn action-secondary" data-page="3">Open my notebooks ↗</button></div>
 </div>
-<aside class="specimen-card" aria-label="Abstract artwork inspired by fibers and connections">
-<div class="specimen-label"><span>FIG. 01 / CONNECTING IDEAS</span><span>LQ</span></div>
-<svg class="fiber-art" viewBox="0 0 460 380" role="img" aria-label="Abstract interwoven fibers"><defs><pattern id="fine-grid" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0H0V30" fill="none" stroke="#334037" stroke-width=".5"/></pattern></defs><rect width="460" height="380" fill="url(#fine-grid)"/><g fill="none" stroke="#faff69" stroke-width="1.4"><path d="M30 300 C100 60,320 350,420 60"/><path d="M36 295 C104 68,317 342,416 64"/><path d="M42 290 C108 76,314 334,412 68"/><path d="M48 285 C112 84,311 326,408 72"/><path d="M54 280 C116 92,308 318,404 76"/><path d="M60 275 C120 100,305 310,400 80"/><path d="M66 270 C124 108,302 302,396 84"/><path d="M72 265 C128 116,299 294,392 88"/><path d="M78 260 C132 124,296 286,388 92"/><path d="M84 255 C136 132,293 278,384 96"/><path d="M90 250 C140 140,290 270,380 100"/><path d="M96 245 C144 148,287 262,376 104"/><path d="M102 240 C148 156,284 254,372 108"/><path d="M108 235 C152 164,281 246,368 112"/></g><g fill="#faff69"><circle cx="78" cy="210" r="5"/><circle cx="260" cy="207" r="5"/><circle cx="395" cy="122" r="5"/></g><g stroke="#92b8a1" stroke-width="1"><path d="M78 210L35 170M260 207L287 290M395 122L430 156"/></g><g fill="#c1d0c5" font-family="monospace" font-size="10"><text x="12" y="158">MATERIALS</text><text x="267" y="307">COMPUTATION</text><text x="350" y="174">APPLICATIONS</text></g></svg>
-<div class="specimen-caption"><p>Curiosity, connected.</p><span>FROM EXPERIMENTS TO RESEARCH TOOLS</span></div>
+
+<aside class="specimen-card cat-wall-card" aria-label="An interactive cat on Liqing's wall">
+<div class="specimen-label"><span>FIG. 01 / TAKING A BREAK</span><span>LQ</span></div>
+<button id="wall-cat" class="wall-cat-button" type="button" aria-label="Click the hanging cat to watch it slide down the wall" aria-describedby="wall-cat-hint">
+<svg viewBox="0 0 460 410" aria-hidden="true">
+<defs><pattern id="wall-grain" width="44" height="44" patternUnits="userSpaceOnUse"><circle cx="6" cy="13" r=".7" fill="#9aa18a" opacity=".2"/><circle cx="31" cy="37" r=".6" fill="#9aa18a" opacity=".2"/></pattern></defs>
+<rect width="460" height="410" fill="url(#wall-grain)"/>
+<path d="M36 373H424" stroke="#b0b69e" stroke-width="1"/>
+<text x="340" y="348" font-family="Georgia,serif" font-style="italic" font-size="53" fill="#7d8862" opacity=".42" transform="rotate(-8 340 348)">LQ</text>
+<ellipse class="wall-cat-shadow" cx="235" cy="374" rx="53" ry="7" fill="#11170e"/>
+<g class="wall-cat-scratches" fill="none" stroke="#697359" stroke-width="2" stroke-linecap="round"><path d="M274 52v105"/><path d="M281 55v105"/><path d="M288 51v105"/></g>
+<g class="wall-cat-body" fill="#111510">
+<path class="wall-cat-tail" d="M267 231C285 215 306 182 294 160C284 143 279 154 283 172C287 191 274 207 260 208Z"/>
+<path d="M202 160C186 186 188 216 201 240C211 260 236 272 256 260C279 247 280 218 264 183L254 146Z"/>
+<path d="M201 177C190 191 176 211 185 225C189 232 198 227 202 217L217 187Z"/>
+<path d="M215 247L217 269Q222 281 230 270L232 252ZM246 247L252 270Q259 280 265 267L262 246Z"/>
+<path class="wall-cat-arm" d="M246 165C256 162 267 154 267 137L268 77L266 57Q269 50 272 57L276 64L278 52Q281 48 283 55L286 63L289 53Q292 51 292 58L292 78L289 139Q289 169 267 186Z"/>
+<path d="M181 122L172 91Q170 80 181 85L203 97Q212 93 224 94L241 70Q248 61 250 74L255 107C272 123 269 151 249 165C226 180 188 176 173 155C165 142 170 130 181 122Z"/>
+<g class="wall-cat-eyes" fill="#f4f5e9"><path d="M202 123C180 119 178 148 199 150C190 145 188 131 202 123Z"/><path d="M243 108C220 104 217 134 241 138C229 130 229 116 243 108Z"/></g>
+<g fill="none" stroke="#111510" stroke-width="2" stroke-linecap="round"><path d="M180 153L162 147M180 158L160 158M183 162L166 169"/></g>
+<path d="M213 157q6 5 12-1" fill="none" stroke="#59604e" stroke-width="1.5" stroke-linecap="round"/>
+</g>
+<g fill="none" stroke="#697359" stroke-width="2.2" stroke-linecap="round"><path d="M273 23q-3 8 0 15M284 17q-3 9 0 17M295 23q-3 8 0 15"/></g>
+<text x="39" y="348" font-family="monospace" font-size="10" letter-spacing="2" fill="#767f67">A LITTLE DISTRACTION.</text>
+</svg></button>
+<div class="specimen-caption"><p>Hang in there.</p><span id="wall-cat-hint">CLICK THE CAT. GRAVITY WILL DO THE REST.</span><span id="wall-cat-status" class="sr-only" role="status" aria-live="polite"></span></div>
 </aside></div>
 <div class="practice-strip"><button class="goto-page-btn practice-item" data-page="2"><span>01 / RESEARCH</span><strong>Composite materials</strong><small>Microstructure · Interfaces · Mechanics</small></button><button class="goto-page-btn practice-item" data-page="1"><span>02 / BUILD</span><strong>Scientific tools</strong><small>Analysis · AI Workflows · Visualization</small></button><button class="goto-page-btn practice-item" data-page="3"><span>03 / SHARE</span><strong>My research notebooks</strong><small>Practical guides, from my own desk</small></button></div>
 <div class="personal-note"><span class="note-mark">↳</span><p>“Make it useful. Then make it clear.”</p><span class="signature">Liqing</span></div><button id="replay-intro" class="action-secondary" style="padding:10px 16px;font-size:11px;margin-bottom:24px;">Replay intro ↻</button>
@@ -318,6 +371,34 @@
   measure();
   if ('ResizeObserver' in window) new ResizeObserver(measure).observe(nav);
   else window.addEventListener('resize', measure, {passive:true});
+})();
+</script>
+
+<script id="liqing-wall-cat-interaction">
+(() => {
+ const cat = document.getElementById('wall-cat');
+ const hint = document.getElementById('wall-cat-hint');
+ const status = document.getElementById('wall-cat-status');
+ const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+ let busy = false;
+ const reset = () => { busy = false; cat.classList.remove('is-sliding','is-resting'); hint.textContent = 'CLICK THE CAT. GRAVITY WILL DO THE REST.'; };
+ cat.addEventListener('click', () => {
+  if (reduced.matches) {
+   const resting = cat.classList.toggle('is-resting');
+   hint.textContent = resting ? 'CLICK AGAIN. BACK TO THE WALL.' : 'CLICK THE CAT. GRAVITY WILL DO THE REST.';
+   status.textContent = resting ? 'The cat is resting at the bottom of the wall.' : 'The cat is hanging on the wall again.';
+   return;
+  }
+  if (busy) return;
+  busy = true; cat.classList.add('is-sliding');
+  hint.textContent = 'WELL… THAT WAS INEVITABLE.';
+  status.textContent = 'The cat slips down the wall, lands, and climbs back up.';
+ });
+ cat.querySelector('.wall-cat-body').addEventListener('animationend', event => {
+  if (event.animationName === 'wall-slip') reset();
+ });
+ reduced.addEventListener('change', reset);
+ ['touchstart','touchend'].forEach(type => cat.addEventListener(type, event => event.stopPropagation(), {passive:true}));
 })();
 </script>
 </body>
