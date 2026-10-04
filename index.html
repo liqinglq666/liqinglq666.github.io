@@ -83,19 +83,19 @@
 </style>
 
 <style id="liqing-wall-cat">
-.cat-wall-card{background:#e7e8d8;border-color:#717660;color:#172019;transform:rotate(2deg);padding:22px}
-.cat-wall-card .specimen-label{color:#646b55}
-.cat-wall-card .specimen-caption{border-color:#b9beaa}
-.cat-wall-card .specimen-caption p{color:#172019}
-.cat-wall-card .specimen-caption span{color:#646b55}
+.cat-wall-card{background:#ffc1d8;border-color:#ffc1d8;color:#281c24;transform:rotate(2deg);padding:22px}
+.cat-wall-card .specimen-label{color:#785364}
+.cat-wall-card .specimen-caption{border-color:#d89ab1}
+.cat-wall-card .specimen-caption p{color:#281c24}
+.cat-wall-card .specimen-caption span{color:#785364}
 #wall-cat-status{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .wall-cat-button{display:block;width:100%;border:0;padding:0;margin:12px 0;background:transparent;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .wall-cat-button svg{display:block;width:100%;height:auto;overflow:hidden}
 .wall-cat-button:focus-visible{outline:2px dashed #52643f;outline-offset:4px}
 .wall-cat-body{transform-origin:230px 160px}
-.wall-cat-arm{transform-origin:260px 145px}
-.wall-cat-tail{transform-origin:263px 225px}
-.wall-cat-eyes{transform-origin:216px 145px}
+.wall-cat-arm{transform-origin:286px 153px}
+.wall-cat-tail{transform-origin:280px 227px}
+.wall-cat-eyes{transform-origin:235px 133px}
 .wall-cat-scratches{stroke-dasharray:108;stroke-dashoffset:108;opacity:0}
 .wall-cat-shadow{transform-origin:235px 374px;opacity:.12}
 .wall-cat-button:hover .wall-cat-tail{animation:wall-tail 1.8s ease-in-out infinite}
@@ -184,28 +184,36 @@
 </div>
 
 <aside class="specimen-card cat-wall-card" aria-label="An interactive cat on Liqing's wall">
-<div class="specimen-label"><span>FIG. 01 / TAKING A BREAK</span><span>LQ</span></div>
+<div class="specimen-label"><span>FIG. 01 / TAKING A BREAK</span></div>
 <button id="wall-cat" class="wall-cat-button" type="button" aria-label="Click the hanging cat to watch it slide down the wall" aria-describedby="wall-cat-hint">
 <svg viewBox="0 0 460 410" aria-hidden="true">
-<defs><pattern id="wall-grain" width="44" height="44" patternUnits="userSpaceOnUse"><circle cx="6" cy="13" r=".7" fill="#9aa18a" opacity=".2"/><circle cx="31" cy="37" r=".6" fill="#9aa18a" opacity=".2"/></pattern></defs>
-<rect width="460" height="410" fill="url(#wall-grain)"/>
-<path d="M36 373H424" stroke="#b0b69e" stroke-width="1"/>
-<text x="340" y="348" font-family="Georgia,serif" font-style="italic" font-size="53" fill="#7d8862" opacity=".42" transform="rotate(-8 340 348)">LQ</text>
-<ellipse class="wall-cat-shadow" cx="235" cy="374" rx="53" ry="7" fill="#11170e"/>
-<g class="wall-cat-scratches" fill="none" stroke="#697359" stroke-width="2" stroke-linecap="round"><path d="M274 52v105"/><path d="M281 55v105"/><path d="M288 51v105"/></g>
-<g class="wall-cat-body" fill="#111510">
-<path class="wall-cat-tail" d="M267 231C285 215 306 182 294 160C284 143 279 154 283 172C287 191 274 207 260 208Z"/>
-<path d="M202 160C186 186 188 216 201 240C211 260 236 272 256 260C279 247 280 218 264 183L254 146Z"/>
-<path d="M201 177C190 191 176 211 185 225C189 232 198 227 202 217L217 187Z"/>
-<path d="M215 247L217 269Q222 281 230 270L232 252ZM246 247L252 270Q259 280 265 267L262 246Z"/>
-<path class="wall-cat-arm" d="M246 165C256 162 267 154 267 137L268 77L266 57Q269 50 272 57L276 64L278 52Q281 48 283 55L286 63L289 53Q292 51 292 58L292 78L289 139Q289 169 267 186Z"/>
-<path d="M181 122L172 91Q170 80 181 85L203 97Q212 93 224 94L241 70Q248 61 250 74L255 107C272 123 269 151 249 165C226 180 188 176 173 155C165 142 170 130 181 122Z"/>
-<g class="wall-cat-eyes" fill="#f4f5e9"><path d="M202 123C180 119 178 148 199 150C190 145 188 131 202 123Z"/><path d="M243 108C220 104 217 134 241 138C229 130 229 116 243 108Z"/></g>
-<g fill="none" stroke="#111510" stroke-width="2" stroke-linecap="round"><path d="M180 153L162 147M180 158L160 158M183 162L166 169"/></g>
-<path d="M213 157q6 5 12-1" fill="none" stroke="#59604e" stroke-width="1.5" stroke-linecap="round"/>
+<defs>
+<filter id="wall-cat-soft-edge" x="-8%" y="-8%" width="116%" height="116%"><feTurbulence type="fractalNoise" baseFrequency=".11" numOctaves="2" seed="7" result="grain"/><feDisplacementMap in="SourceGraphic" in2="grain" scale="1.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+</defs>
+<path d="M36 373H424" stroke="#d99cb3" stroke-width="1"/>
+<ellipse class="wall-cat-shadow" cx="243" cy="374" rx="58" ry="7" fill="#3a202d"/>
+<g class="wall-cat-scratches" fill="none" stroke="#a96983" stroke-width="2" stroke-linecap="round"><path d="M294 52v105"/><path d="M301 55v105"/><path d="M308 51v105"/></g>
+<g class="wall-cat-body" fill="#09090a">
+<g filter="url(#wall-cat-soft-edge)">
+<path class="wall-cat-tail" d="M281 247C317 244 344 222 339 191C337 174 327 159 319 160C309 161 314 175 320 188C330 211 313 230 281 228Z"/>
+<path d="M217 149C204 168 202 205 204 229C205 258 222 271 250 269C280 271 299 255 299 223C299 195 290 170 275 147Z"/>
+<path d="M216 159C201 174 197 198 200 216Q204 230 214 221L229 184Z"/>
+<path d="M219 255Q216 271 226 272Q238 274 241 258ZM258 257Q259 273 271 272Q283 269 280 255Z"/>
+<path class="wall-cat-arm" d="M274 172Q289 178 302 162Q313 147 312 117L312 73L309 54Q306 48 304 57L301 64L298 54Q294 47 293 57L292 65L288 58Q282 52 283 61L285 77L283 125Q284 140 270 150Z"/>
+<path d="M184 117Q173 98 175 88Q177 76 191 84L211 94Q222 89 238 91L248 72Q253 62 263 73Q275 85 281 110Q293 133 279 153Q267 173 238 174Q209 177 192 162Q177 147 184 117Z"/>
+<path d="M185 90L200 103L187 110Z" fill="#121214"/>
+<path d="M256 81Q267 90 270 104L253 97Z" fill="#111113"/>
+<path d="M215 179Q208 213 218 239Q225 249 235 242Q230 213 235 187Z" fill="#0d0d0f"/>
 </g>
-<g fill="none" stroke="#697359" stroke-width="2.2" stroke-linecap="round"><path d="M273 23q-3 8 0 15M284 17q-3 9 0 17M295 23q-3 8 0 15"/></g>
-<text x="39" y="348" font-family="monospace" font-size="10" letter-spacing="2" fill="#767f67">A LITTLE DISTRACTION.</text>
+<g class="wall-cat-eyes" fill="#09090a" stroke="#f8f6ed" stroke-width="3.4" filter="url(#wall-cat-soft-edge)">
+<ellipse cx="218" cy="139" rx="12" ry="15" transform="rotate(-18 218 139)"/>
+<ellipse cx="260" cy="126" rx="14" ry="17" transform="rotate(-16 260 126)"/>
+</g>
+<path d="M236 155l5 2l-3 3Z" fill="#28252b"/>
+<path d="M233 163q6 3 10-2" stroke="#242129" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+</g>
+<g fill="none" stroke="#a96983" stroke-width="2.2" stroke-linecap="round"><path d="M293 23q-3 8 0 15M304 17q-3 9 0 17M315 23q-3 8 0 15"/></g>
+<text x="39" y="348" font-family="monospace" font-size="10" letter-spacing="2" fill="#a06a81">A LITTLE DISTRACTION.</text>
 </svg></button>
 <div class="specimen-caption"><p>Hang in there.</p><span id="wall-cat-hint">CLICK THE CAT. GRAVITY WILL DO THE REST.</span><span id="wall-cat-status" class="sr-only" role="status" aria-live="polite"></span></div>
 </aside></div>
