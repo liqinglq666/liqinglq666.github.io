@@ -95,6 +95,30 @@ const app = (() => {
       "Data Analysis",
       "Grey Relational Analysis"
     ]
+  },
+  {
+    "title": "PerfectDay AI",
+    "url": "https://github.com/liqinglq666/perfectday-ai",
+    "demo": "https://perfectday-ai.vercel.app",
+    "desc": "An AI-powered dual-district outing companion that turns personal preferences into practical routes and replans upcoming stops as plans change.",
+    "language": "Next.js · TypeScript",
+    "tags": [
+      "AI",
+      "Route Planning",
+      "Stateful Workflows"
+    ]
+  },
+  {
+    "title": "Zhilink Tianhe AI Workspace",
+    "url": "https://github.com/liqinglq666/zhilink-tianhe-enterprise-ai-workspace",
+    "demo": "https://zhilink-tianhe-ai-workspace.onrender.com",
+    "desc": "An enterprise AI workspace connecting meeting notes, contract review, policy research, and project execution in a reviewable, traceable workflow.",
+    "language": "Python · FastAPI",
+    "tags": [
+      "AI",
+      "Enterprise Workflow",
+      "AI Agents"
+    ]
   }
 ];
 
