@@ -74,11 +74,35 @@
 </style>
 <style id="liqing-cat-intro">
 #splash{background:#000;overflow:hidden}
-#splash-video{position:absolute;width:100%;height:100%;inset:0;object-fit:contain;display:block}
+#splash-video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:contain;
+  /* Preserve hard edges in the pixel-art cat/LQ artwork on high-DPI displays.
+     The native video is 1280x720; browser bilinear scaling softens its pixels. */
+  image-rendering:crisp-edges;
+  image-rendering:pixelated;
+}
 #splash-enter-btn{position:absolute;bottom:max(32px,calc(20px + env(safe-area-inset-bottom)));left:50%;transform:translateX(-50%);z-index:20;min-height:44px;padding:12px 22px;background:transparent;color:#faff69;border:1px solid #53583a;border-radius:0;font:600 12px/1.4 Arial,sans-serif;letter-spacing:.6px;opacity:1;cursor:pointer}
 #splash-enter-btn:hover{background:#faff69;color:#000}
 #splash-enter-btn:focus-visible{outline:2px solid #faff69;outline-offset:4px}
-@media(max-width:639px){#splash-video{width:170%;max-width:none;left:50%;transform:translateX(-50%)}}
+@media(max-width:639px) and (orientation:portrait){
+  #splash-video{
+    /* Keep the intentional close-up on narrow screens without stretching
+       a full-height video box and resampling the image twice. */
+    inset:auto;
+    width:170vw;
+    max-width:none;
+    height:auto;
+    aspect-ratio:16/9;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+  }
+}
 @media(prefers-reduced-motion:reduce){#splash,#main-content{transition:none}}
 </style>
 
