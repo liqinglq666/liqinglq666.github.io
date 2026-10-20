@@ -317,10 +317,8 @@ const app = (() => {
     if (!video) { hideSplash(); return; }
     video.pause();
     video.currentTime = 0;
-    video.onended = () => {
-      if (replay) clearTimeout(splashTimer);
-      else hideSplash();
-    };
+    // Replay must also return to the homepage after the video ends.
+    video.onended = hideSplash;
     video.onerror = () => {
       // Keep the static poster and immediately available skip button.
       splashTimer = setTimeout(hideSplash, 1800);
@@ -384,6 +382,7 @@ const app = (() => {
         if (modal) {
           modal.style.display = 'flex';
           document.body.style.overflow = 'hidden';
+          modal.querySelector('#resume-modal-close')?.focus();
         }
       });
     }
@@ -395,8 +394,10 @@ const app = (() => {
 
     const closeResumeModal = () => {
       if (modal) {
+        const wasOpen = modal.style.display !== 'none';
         modal.style.display = 'none';
         document.body.style.overflow = '';
+        if (wasOpen) resumeBtn?.focus({ preventScroll: true });
       }
     };
 
@@ -418,13 +419,34 @@ const app = (() => {
 
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modal.style.display !== 'none') {
+          e.preventDefault();
           closeResumeModal();
+        }
+      });
+
+      // Keep keyboard focus inside the open resume dialog.
+      modal.addEventListener('keydown', (e) => {
+        if (e.key !== 'Tab') return;
+        const focusables = Array.from(modal.querySelectorAll('a[href], button:not([disabled])'));
+        if (!focusables.length) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
         }
       });
     }
 
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
+      // Do not switch sections while a dialog is open or while editing text.
+      if ((modal && modal.style.display !== 'none') ||
+          e.altKey || e.ctrlKey || e.metaKey ||
+          e.target.closest?.('input, textarea, select, [contenteditable="true"]')) return;
       if (state.showSplash) {
         // Any key to hide splash
         if (e.code !== 'Tab') {
