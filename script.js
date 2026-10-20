@@ -97,18 +97,17 @@ const app = (() => {
     ]
   },
   {
-    "title": "PerfectDay AI",
-    "url": "https://github.com/liqinglq666/perfectday-ai",
-    "demo": "https://perfectday-ai.vercel.app",
-    "desc": "An AI-powered dual-district outing companion that turns personal preferences into practical routes and replans upcoming stops as plans change.",
-    "language": "Next.js · TypeScript",
+    "title": "Yuejian Feiyi Agent",
+    "url": "https://github.com/liqinglq666/Yuejian-Feiyi-Agent",
+    "demo": "https://yuejian-feiyi-agent.streamlit.app/",
+    "desc": "An AI-powered Guangdong intangible cultural heritage workspace for cultural travel planning, study experiences, and creative storytelling, grounded in local hybrid retrieval.",
+    "language": "Python · Streamlit",
     "tags": [
       "AI",
-      "Route Planning",
-      "Stateful Workflows"
+      "Cultural Tourism",
+      "RAG"
     ]
-  },
-  {
+  },  {
     "title": "Zhilink Tianhe AI Workspace",
     "url": "https://github.com/liqinglq666/zhilink-tianhe-enterprise-ai-workspace",
     "demo": "https://zhilink-tianhe-ai-workspace.onrender.com",
