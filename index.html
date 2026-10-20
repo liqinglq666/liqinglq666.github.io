@@ -281,7 +281,7 @@
               <div class="border p-6 sm:p-8 rounded-lg" style="border-color: rgba(65, 65, 65, 0.8);">
                 <h3 class="text-lg sm:text-xl font-bold mb-6" style="color: #ffffff; font-weight: 700;">Resume</h3>
                 <p class="mb-4 leading-relaxed text-sm" style="color: #a0a0a0;">Resume available upon request. Please contact me by email.</p>
-                <button id="resume-btn" class="px-6 sm:px-8 py-2 sm:py-3 font-bold text-sm rounded transition-all duration-200 hover:scale-105 active:scale-95" style="background: #166534; color: #ffffff; border: 1px solid #141414; cursor: pointer;">Request Resume</button>
+                <button id="resume-btn" aria-haspopup="dialog" aria-controls="resume-modal" class="px-6 sm:px-8 py-2 sm:py-3 font-bold text-sm rounded transition-all duration-200 hover:scale-105 active:scale-95" style="background: #166534; color: #ffffff; border: 1px solid #141414; cursor: pointer;">Request Resume</button>
               </div>
             </div>
           </div>
@@ -289,24 +289,24 @@
       </div>
     </div>
 
-    <div id="resume-modal" class="fixed inset-0 z-50 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center" style="display: none;">
+    <div id="resume-modal" role="dialog" aria-modal="true" aria-labelledby="resume-modal-title" class="fixed inset-0 z-50 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center" style="display: none;">
       <div class="bg-black border rounded-lg relative" style="border-color: rgba(65, 65, 65, 0.8); background: rgba(0, 0, 0, 0.95); width: 90%; max-width: 380px; padding: 24px 28px;">
-        <button class="absolute top-3 right-3 text-gray-400 hover:text-white text-2xl w-8 h-8 flex items-center justify-center rounded transition-colors" id="resume-modal-close">×</button>
+        <button class="absolute top-3 right-3 text-gray-400 hover:text-white text-2xl w-8 h-8 flex items-center justify-center rounded transition-colors" id="resume-modal-close" type="button" aria-label="Close resume request dialog">×</button>
         <div class="text-center">
           <div style="font-size: 40px; margin-bottom: 12px;">📄</div>
-          <h3 class="font-bold mb-3" style="color: #ffffff; font-size: 18px;">Request Resume</h3>
+          <h3 id="resume-modal-title" class="font-bold mb-3" style="color: #ffffff; font-size: 18px;">Request Resume</h3>
           <p class="text-sm leading-relaxed mb-4" style="color: #a0a0a0; font-size: 13px;">Please email me to request my current resume.</p>
           <p style="color: #faff69; font-weight: 600; font-size: 12px; margin-bottom: 16px;">Get in touch to learn more about my work.</p>
           <div class="flex gap-2" style="display: flex; gap: 8px;">
             <a href="mailto:liqinglq666@gmail.com" class="font-bold rounded transition-all duration-200 hover:scale-105 active:scale-95" style="background: #faff69; color: #151515; border: 1px solid #faff69; cursor: pointer; text-decoration: none; display: flex; align-items: center; justify-content: center; flex: 1; padding: 8px 12px; font-size: 12px;">Email Me</a>
-            <button id="resume-modal-close-btn" class="font-bold rounded transition-all duration-200 hover:scale-105 active:scale-95" style="background: transparent; color: #a0a0a0; border: 1px solid #a0a0a0; cursor: pointer; flex: 1; padding: 8px 12px; font-size: 12px;">Close</button>
+            <button id="resume-modal-close-btn" type="button" class="font-bold rounded transition-all duration-200 hover:scale-105 active:scale-95" style="background: transparent; color: #a0a0a0; border: 1px solid #a0a0a0; cursor: pointer; flex: 1; padding: 8px 12px; font-size: 12px;">Close</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <script src="script.js?v=yuejian-feiyi-20261020-v1"></script>
+  <script src="script.js?v=site-audit-fixes-20261020-v2"></script>
 
 
 <script>
