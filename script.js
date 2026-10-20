@@ -321,11 +321,13 @@ const app = (() => {
     video.onended = hideSplash;
     video.onerror = () => {
       // Keep the static poster and immediately available skip button.
+      clearTimeout(splashTimer);
       splashTimer = setTimeout(hideSplash, 1800);
     };
     splashTimer = setTimeout(hideSplash, 8000);
     if (reducedMotion) {
       // A quiet title card replaces the moving sequence.
+      clearTimeout(splashTimer);
       splashTimer = setTimeout(hideSplash, 1800);
       return;
     }
