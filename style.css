@@ -973,5 +973,31 @@ button:focus-visible,a:focus-visible {outline:2px solid #faff69;outline-offset:5
 *,*:before,*:after {animation:none !important;transition:none !important;scroll-behavior:auto !important;}
 }
 
+
+/* Spacing for the tutorial collection link. */
+.mt-8 { margin-top: var(--space-8); }
+
+/* Resume dialog: explicit styles, independent of optional utility classes. */
+#resume-modal {
+  background: rgba(0, 0, 0, .78);
+  backdrop-filter: blur(6px);
+  padding: 16px;
+}
+#resume-modal > div {
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+}
+#resume-modal-close {
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  color: #b4b4aa;
+  font-size: 24px;
+  line-height: 1;
+}
+#resume-modal-close:hover { color: #ffffff; }
+#resume-modal-title { margin-bottom: 12px; }
+
 #main-content nav {top:0;left:0;right:0;width:100%;z-index:1000;}
 .practice-item:hover {transform:none;}
