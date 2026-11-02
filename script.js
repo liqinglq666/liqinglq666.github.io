@@ -18,7 +18,6 @@ const app = (() => {
     totalPages: 5,
     showSplash: true,
     animateLetters: false,
-    expandedCard: null,
     isNavigating: false,
   };
 
@@ -121,8 +120,6 @@ const app = (() => {
   }
 ];
 
-  const growthCards = [];
-
   // ========================================================================
   // STATE MUTATIONS
   // ========================================================================
@@ -139,9 +136,13 @@ const app = (() => {
     state.isNavigating = true;
     setState({ currentPage: pageIndex });
 
+    // Start each section at its heading, including when returning to it.
+    const page = document.getElementById(`page-${pageIndex}`);
+    if (page) page.scrollTop = 0;
+
     setTimeout(() => {
       state.isNavigating = false;
-    }, 700);
+    }, window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 700);
   };
 
   const nextPage = () => {
@@ -167,11 +168,6 @@ const app = (() => {
     if (document.getElementById('splash')?.contains(document.activeElement)) {
       document.querySelector('.nav-btn[data-page="0"]')?.focus({preventScroll:true});
     }
-  };
-
-  const toggleGrowthCard = (cardIndex) => {
-    const newExpandedCard = state.expandedCard === cardIndex ? null : cardIndex;
-    setState({ expandedCard: newExpandedCard });
   };
 
   const notify = () => {
@@ -205,9 +201,11 @@ const app = (() => {
     document.querySelectorAll('.nav-btn').forEach((btn, index) => {
       if (index === state.currentPage) {
         btn.setAttribute('data-active', 'true');
+        btn.setAttribute('aria-current', 'page');
         btn.style.color = '#faff69';
       } else {
         btn.setAttribute('data-active', 'false');
+        btn.removeAttribute('aria-current');
         btn.style.color = '#a0a0a0';
       }
     });
@@ -255,55 +253,6 @@ const app = (() => {
         ${project.demo ? `<a class="project-link" href="${project.demo}" target="_blank" rel="noopener noreferrer">Live Demo →</a>` : ''}
       </div>
     `).join('');
-  };
-
-  const renderGrowthCards = () => {
-    const container = document.getElementById('growth-cards');
-    if (!container) return;
-
-    container.innerHTML = growthCards.map((card, i) => `
-      <div class="growth-card border p-6 sm:p-8 rounded-lg transition-all" style="border-color: rgba(65, 65, 65, 0.8); cursor: pointer;" data-card="${i}">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <h3 class="text-lg sm:text-xl font-bold" style="color: #ffffff; font-weight: 700;">${card.title}</h3>
-          <span style="color: #faff69; font-weight: 700; font-size: 20px; user-select: none;" class="expand-icon">+</span>
-        </div>
-        <div class="card-content" style="
-          max-height: 0;
-          overflow: hidden;
-          transition: max-height 300ms ease;
-          margin-top: 0;
-        ">
-          <p class="leading-relaxed text-xs sm:text-sm" style="color: #a0a0a0; margin-top: 16px;">${card.content}</p>
-        </div>
-      </div>
-    `).join('');
-
-    // Attach click handlers
-    document.querySelectorAll('.growth-card').forEach((card) => {
-      card.addEventListener('click', () => {
-        const cardIndex = parseInt(card.getAttribute('data-card'));
-        toggleGrowthCard(cardIndex);
-      });
-    });
-  };
-
-  const updateGrowthCardStates = () => {
-    document.querySelectorAll('.growth-card').forEach((card, index) => {
-      const isExpanded = index === state.expandedCard;
-      const content = card.querySelector('.card-content');
-      const icon = card.querySelector('.expand-icon');
-
-      if (isExpanded) {
-        const height = card.querySelector('p')?.scrollHeight || 0;
-        content.style.maxHeight = (height + 16) + 'px';
-        content.style.marginTop = '16px';
-        icon.textContent = '−';
-      } else {
-        content.style.maxHeight = '0';
-        content.style.marginTop = '0';
-        icon.textContent = '+';
-      }
-    });
   };
 
   // ========================================================================
@@ -360,6 +309,14 @@ const app = (() => {
       btn.addEventListener('click', () => {
         const pageIndex = parseInt(btn.getAttribute('data-page'));
         goToPage(pageIndex);
+        // The clicked CTA becomes inert after navigation; move focus to the new heading.
+        if (state.currentPage === pageIndex) {
+          const heading = document.querySelector(`#page-${pageIndex} .section-heading h2`);
+          if (heading) {
+            heading.tabIndex = -1;
+            heading.focus({ preventScroll: true });
+          }
+        }
       });
     });
 
@@ -383,6 +340,7 @@ const app = (() => {
         const modal = document.getElementById('resume-modal');
         if (modal) {
           modal.style.display = 'flex';
+          document.getElementById('main-content').inert = true;
           document.body.style.overflow = 'hidden';
           modal.querySelector('#resume-modal-close')?.focus();
         }
@@ -399,7 +357,10 @@ const app = (() => {
         const wasOpen = modal.style.display !== 'none';
         modal.style.display = 'none';
         document.body.style.overflow = '';
-        if (wasOpen) resumeBtn?.focus({ preventScroll: true });
+        if (wasOpen) {
+          document.getElementById('main-content').inert = state.showSplash;
+          resumeBtn?.focus({ preventScroll: true });
+        }
       }
     };
 
@@ -448,7 +409,7 @@ const app = (() => {
       // Do not switch sections while a dialog is open or while editing text.
       if ((modal && modal.style.display !== 'none') ||
           e.altKey || e.ctrlKey || e.metaKey ||
-          e.target.closest?.('input, textarea, select, [contenteditable="true"]')) return;
+          e.target.closest?.('a, button, input, textarea, select, [contenteditable="true"]')) return;
       if (state.showSplash) {
         // Any key to hide splash
         if (e.code !== 'Tab') {
@@ -468,7 +429,8 @@ const app = (() => {
     let swipeStart = null;
     document.addEventListener('touchstart', (e) => {
       swipeStart = null;
-      if (state.showSplash || e.touches.length !== 1 ||
+      if (state.showSplash || (modal && modal.style.display !== 'none') ||
+          e.touches.length !== 1 ||
           e.target.closest('a, button, input, textarea, select, [contenteditable="true"]')) return;
       swipeStart = {x:e.touches[0].clientX, y:e.touches[0].clientY};
     }, {passive:true});
@@ -492,14 +454,12 @@ const app = (() => {
   const init = () => {
     // Render static content
     renderProjects();
-    renderGrowthCards();
 
     // Setup event listeners
     setupEventListeners();
 
     // Initial render
     updatePageDisplay();
-    updateGrowthCardStates();
 
     let seen = false;
     try { seen = sessionStorage.getItem(introSessionKey) === 'seen'; } catch (_) {}
@@ -519,16 +479,12 @@ const app = (() => {
   };
 
   // Subscribe to state changes for rendering
-  subscribe(() => {
-    updatePageDisplay();
-    updateGrowthCardStates();
-  });
+  subscribe(updatePageDisplay);
 
   return {
     goToPage,
     nextPage,
     prevPage,
-    toggleGrowthCard,
     hideSplash,
     getState: () => ({ ...state }),
     subscribe,
